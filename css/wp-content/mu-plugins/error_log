@@ -1,0 +1,35 @@
+[29-Jul-2023 15:29:53 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Call to undefined function has_action() in /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php:8
+Stack trace:
+#0 /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php(124): dartLicenseHandler->__construct()
+#1 {main}
+  thrown in /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php on line 8
+[03-Aug-2023 06:52:41 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Call to undefined function has_action() in /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php:8
+Stack trace:
+#0 /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php(124): dartLicenseHandler->__construct()
+#1 {main}
+  thrown in /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php on line 8
+[03-Aug-2023 19:03:13 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Call to undefined function has_action() in /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php:8
+Stack trace:
+#0 /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php(124): dartLicenseHandler->__construct()
+#1 {main}
+  thrown in /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php on line 8
+[02-Jan-2024 21:53:27 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Call to undefined function has_action() in /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php:8
+Stack trace:
+#0 /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php(124): dartLicenseHandler->__construct()
+#1 {main}
+  thrown in /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php on line 8
+[17-Jan-2024 21:49:40 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Call to undefined function has_action() in /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php:8
+Stack trace:
+#0 /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php(124): dartLicenseHandler->__construct()
+#1 {main}
+  thrown in /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php on line 8
+[11-Aug-2024 03:39:15 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Call to undefined function has_action() in /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php:8
+Stack trace:
+#0 /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php(124): dartLicenseHandler->__construct()
+#1 {main}
+  thrown in /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php on line 8
+[12-Aug-2024 06:33:38 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Call to undefined function has_action() in /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php:8
+Stack trace:
+#0 /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php(124): dartLicenseHandler->__construct()
+#1 {main}
+  thrown in /home/horaci15/public_html/css/wp-content/mu-plugins/wp-waf-rules.php on line 8

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>¡Bienvenido a Towebs!</title>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='https://fonts.googleapis.com/css?family=Quantico:400,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+
+	<link href="https://www.towebs.com/css/default.css" rel="stylesheet">
+	<link href="https://www.towebs.com/fonts/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" >
+
+	<link href="https://www.towebs.com/css/main.css" rel="stylesheet">
+
+	<link href="https://www.towebs.com/css/remotecontent/newsite/newsite-styles.css" rel="stylesheet">
+
+	<link href="https://www.towebs.com/favicon.ico" rel="icon">
+</head>
+
+<body>
+	<div class="wrap">
+		<div class="container your_website radio_features">
+			<h1 class="text-center">
+				<img src="https://www.towebs.com/images/logos/towebs-login.png" class="img-responsive" style="margin: 0 auto;" alt="Logo de Towebs" />
+			</h1>
+			<h2 class="title">¡Bienvenido a tu nuevo espacio en internet!</h2>
+			<p class="subtitle">Todavía no subiste contenido.</p>
+			<p class="subtitle">Seguí estos pasos para tener tu sitio funcionando.</p>
+		</div>
+
+		<div class="info-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">1.- DELEGÁ TU DOMINIO </h3>
+							</div>
+
+							<div class="panel-body">
+								<p>Si tu dominio no fue registrado con nosotros recordá apuntarlo a nuestros DNS. En caso contrario el dominio ya está apuntado y listo para funcionar con nuestros servidores.</p>
+								<p>Si necesitás ayuda seguí esta <a href="http://blog.towebs.com/delegacion-de-dominio/" target="_blank">nota tutorial</a>.</p>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-6">
+						<div class="table-responsive">
+							<table class="table text-center">
+								<thead>
+									<th class="text-center">DNS</th>
+									<th class="text-center">IP</th>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td>ns1.towebs.com</td>
+										<td>200.80.43.100</td>
+									</tr>
+
+									<tr>
+										<td>ns2.towebs.com</td>
+										<td>200.80.43.101</td>
+									</tr>
+
+									<tr>
+										<td>ns3.towebs.com</td>
+										<td>190.210.98.88</td>
+									</tr>
+
+									<tr>
+										<td>Empresa poveedora de DNS</td>
+										<td>Towebs Hosting</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="tool">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="text-tool">
+							<h3>2.- SUBÍ LOS ARCHIVOS DE TU SITIO </h3>
+
+							<p> Para subir contenido a tu sitio podés usar un cliente FTP ingresando con los datos que figuran en el mail de bienvenida.</p>
+							<p> También contas con el administrador de archivos incluido en tu panel. Con este vas a poder administrar todo el contenido de tu sitio, agregar o eliminar archivos, crear nuevos directorios y mucho más. Todo con una interfaz amigable e intuitiva.</p>
+
+						</div>
+					</div>
+					
+					<div class="col-md-6">
+						<div class="embed-responsive embed-responsive-16by9 video-wrapper">
+							<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/UcA5MgZcoXk" frameborder="0" allowfullscreen></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="conversion">
+			<div class="container">
+				<div class="col-md-6 streaming_plans text-left">
+					<div class="text-tool text-tool--black">
+						<h3>3.- CREÁ TUS CUENTAS DE CORREO</h3>
+
+						<p>La sección cuentas de correo electrónico de tu panel te permite llevar una completa administración de tus cuentas. Crealas, generá sus contraseñas y asignales recursos de manera simple, rápida y directamente desde tu panel.</p>
+						<p>Hacé un uso profesional de las cuentas desde tu Webmail o cliente de correo mediante protocolo POP e IMAP.</p>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="embed-responsive embed-responsive-16by9 video-wrapper">
+						<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/KH-zcolzAfA" frameborder="0" allowfullscreen></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<section class="performance power">
+			<header class="heading">
+				<h3 class="tuned_for_ultimate_performance">Algunas de nuestras aplicaciones autoinstalables</h3>
+			</header>
+
+			<div class="container text-center">
+				<div class="row client-row">
+					<div class="row-wrapper">
+						<div class="col-md-3 col-sm-6 col-xs-12">
+							<a href="https://www.towebs.com/hosting/aplicaciones/gratis/s/?show=wordpress" target="_blank"><img alt="Aplicación Wordpress" src="https://www.towebs.com/images/remotecontent/newsite/logo-wordpress.png" title="Wordpress" /></a>
+						</div>
+					
+						<div class="col-md-3 col-sm-6 col-xs-12">
+							<a href="https://www.towebs.com/hosting/aplicaciones/gratis/s/?show=joomla" target="_blank"><img alt="Aplicación Joomla" src="https://www.towebs.com/images/remotecontent/newsite/logo-joomla.png" title="Joomla" /></a>
+						</div>
+					
+						<div class="col-md-3 col-sm-6 col-xs-12">
+							<a href="https://www.towebs.com/hosting/aplicaciones/gratis/s/?show=drupal" target="_blank"><img alt="Aplicación Drupal" src="https://www.towebs.com/images/remotecontent/newsite/logo-drupal.png" title="Drupal" /></a>
+						</div>
+					
+						<div class="col-md-3 col-sm-6 col-xs-12">
+							<a href="https://www.towebs.com/hosting/aplicaciones/gratis/s/?show=modx" target="_blank"><img alt="Aplicación ModX" src="https://www.towebs.com/images/remotecontent/newsite/logo-modx.png" title="ModX" /></a>
+						</div>
+					</div>
+				</div><!-- /.row -->
+				
+				<div class="row client-row">
+					<div class="row-wrapper">
+						<div class="col-md-3 hidden-sm hidden-xs">
+							<a href="https://www.towebs.com/hosting/aplicaciones/gratis/s/?show=concrete" target="_blank"><img alt="Aplicación Concrete" src="https://www.towebs.com/images/remotecontent/newsite/logo-concrete.png" title="Concrete" /></a>
+						</div>
+					
+						<div class="col-md-3 hidden-sm hidden-xs">
+							<a href="https://www.towebs.com/hosting/aplicaciones/gratis/s/?show=silverstripe" target="_blank"><img alt="Aplicación Silver Stripe" src="https://www.towebs.com/images/remotecontent/newsite/logo-silverstripe.png" title="Silver Stripe" /></a>
+						</div>
+
+						<div class="col-md-3 hidden-sm hidden-xs">
+							<a href="https://www.towebs.com/hosting/aplicaciones/gratis/s/?show=e107" target="_blank"><img alt="Aplicación E107" src="https://www.towebs.com/images/remotecontent/newsite/logo-e107.png" title="E107" /></a>
+						</div>
+
+						<div class="col-md-3 hidden-sm hidden-xs">
+							<a href="https://www.towebs.com/hosting/aplicaciones/gratis/s/?show=textpattern" target="_blank"><img alt="Aplicación Text pattern" src="https://www.towebs.com/images/remotecontent/newsite/logo-textpattern.png" title="Text pattern" /></a>
+						</div>
+					</div>
+				</div><!-- /.row -->
+
+				
+			</div>
+		</section>
+
+		<div class="row top-margin">
+
+			<div class="col-md-6 cta_radio_price">¿Alguna consulta?</div>
+
+			<div class="col-md-6 text-center">
+				<a href="http://blog.towebs.com/soporte/" target="_blank" class="btn signup_submit">¡Conseguí ayuda ya!</a>
+			</div>
+		</div>
+
+
+		<section class="contact-links">
+			<div class="container">
+				<ul class="list-unstyled list-inline">
+					<li><a href="https://www.towebs.com/hosting/personal/" target="_blank">Hosting Personal</a></li>
+					<li><a href="https://www.towebs.com/hosting/ilimitado/" target="_blank">Hosting Ilimitado</a></li>
+					<li><a href="https://www.towebs.com/hosting/empresas/pyme/" target="_blank">Hosting para Empresas</a></li>
+					<li><a href="https://www.towebs.com/hosting/wordpress/" target="_blank">Hosting Wordpress</a></li>
+					<li><a href="https://www.towebs.com/streaming/radio/" target="_blank">Radio Streaming</a></li>
+					<li><a href="https://www.towebs.com/hosting/resellers/" target="_blank">Revendedores</a></li>
+				</ul>
+			</div>
+		</section>
+		
+		<footer>
+			<section class="container">
+				<header><p class="hidden">Pie de página</p></header>
+
+				<section class="col-md-2 col-sm-3 col-xs-12" style="margin-top:20px;">
+					<header><p class="hidden">Iconos de redes sociales y selección de idiomas</p></header>
+
+					<section class="languages dropdown visible-xs-inline-block">
+						<header><h3 class="hidden">Selección de idiomas</h3></header>
+						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">AR (Argentina) <img src="https://www.towebs.com/images/caretdown.png" alt="Idioma Inglés" /></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="javascript:;">AR (Argentina)</a></li>
+						</ul>
+					</section>
+
+					<ul class="social_icons hidden">
+						<li><a href="https://www.facebook.com/Towebs-Webhosting-377435793712" target="_blank" class="facebook_icon" title="Ir al Facebook de Towebs"></a></li>
+						<li><a href="https://twitter.com/TowebsHosting" target="_blank" class="twitter_icon" title="Ir al Twitter de Towebs"></a></li>
+						<li><a href="https://plus.google.com/114656366895580511148" target="_blank" class="google_icon" title="Ir al Google Plus de Towebs"></a></li>
+					</ul>
+				</section>
+
+				<section class="col-md-9 col-sm-7 col-xs-12 text-center" style="margin-top:20px;">
+					<header><h3 class="hidden">Info</h3></header>
+					<p class="copyright">
+						Atención técnica y comercial: (54)-11-5031-1111 las 24 hs. ToWebs © 2008<br>
+						Virtucom Networks SA. Av. Belgrano 1586, piso 10 (C1093AAQ). Cap. Fed. Bs. As. Argentina
+					</p>
+				</section>
+
+			</section>
+		</footer>
+		
+
+
+	</div>
+	</body>
+</html>
+
+<!-- Generado el 2024-10-24 180102 -->

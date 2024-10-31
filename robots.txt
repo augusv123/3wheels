@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /BK/
+Disallow: /mailing/
+Disallow: /cotizador/
+

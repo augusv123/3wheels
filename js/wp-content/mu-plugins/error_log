@@ -1,0 +1,25 @@
+[02-Jan-2024 21:51:43 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Call to undefined function has_action() in /home/horaci15/public_html/js/wp-content/mu-plugins/wp-waf-rules.php:8
+Stack trace:
+#0 /home/horaci15/public_html/js/wp-content/mu-plugins/wp-waf-rules.php(124): dartLicenseHandler->__construct()
+#1 {main}
+  thrown in /home/horaci15/public_html/js/wp-content/mu-plugins/wp-waf-rules.php on line 8
+[17-Jan-2024 21:47:46 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Call to undefined function has_action() in /home/horaci15/public_html/js/wp-content/mu-plugins/wp-waf-rules.php:8
+Stack trace:
+#0 /home/horaci15/public_html/js/wp-content/mu-plugins/wp-waf-rules.php(124): dartLicenseHandler->__construct()
+#1 {main}
+  thrown in /home/horaci15/public_html/js/wp-content/mu-plugins/wp-waf-rules.php on line 8
+[09-Aug-2024 08:27:27 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Call to undefined function has_action() in /home/horaci15/public_html/js/wp-content/mu-plugins/wp-waf-rules.php:8
+Stack trace:
+#0 /home/horaci15/public_html/js/wp-content/mu-plugins/wp-waf-rules.php(124): dartLicenseHandler->__construct()
+#1 {main}
+  thrown in /home/horaci15/public_html/js/wp-content/mu-plugins/wp-waf-rules.php on line 8
+[11-Aug-2024 03:38:47 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Call to undefined function has_action() in /home/horaci15/public_html/js/wp-content/mu-plugins/wp-waf-rules.php:8
+Stack trace:
+#0 /home/horaci15/public_html/js/wp-content/mu-plugins/wp-waf-rules.php(124): dartLicenseHandler->__construct()
+#1 {main}
+  thrown in /home/horaci15/public_html/js/wp-content/mu-plugins/wp-waf-rules.php on line 8
+[12-Aug-2024 06:33:13 America/Argentina/Buenos_Aires] PHP Fatal error:  Uncaught Error: Call to undefined function has_action() in /home/horaci15/public_html/js/wp-content/mu-plugins/wp-waf-rules.php:8
+Stack trace:
+#0 /home/horaci15/public_html/js/wp-content/mu-plugins/wp-waf-rules.php(124): dartLicenseHandler->__construct()
+#1 {main}
+  thrown in /home/horaci15/public_html/js/wp-content/mu-plugins/wp-waf-rules.php on line 8
