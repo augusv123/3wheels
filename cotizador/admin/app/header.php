@@ -42,7 +42,7 @@ $lugar=array("","Obelisco (Av. 9 de Julio y Av. Corrientes)","Aeroparque (Aeropu
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cotizador</title>
     <meta name="robots" content="noindex" />
@@ -56,6 +56,11 @@ $lugar=array("","Obelisco (Av. 9 de Julio y Av. Corrientes)","Aeroparque (Aeropu
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- html2pdf.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+
   <style>
 
   body{
@@ -180,7 +185,7 @@ $lugar=array("","Obelisco (Av. 9 de Julio y Av. Corrientes)","Aeroparque (Aeropu
                 </a>
             </li>
             <li class="sidebar-item  ">
-                <a href="formulario.php" class='sidebar-link' target="_blank">
+                <a href="formulario.php" class='sidebar-link'>
                     <i class="bi bi-calculator"></i>
                     <span>Cotizador Web</span>
                 </a>
