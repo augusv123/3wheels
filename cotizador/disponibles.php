@@ -245,9 +245,9 @@ $_SESSION["tiempo"] = time();
                     <a class="ocul" href="<?php echo $disponible["MINIATURA_2"] ?>"><img src="<?php echo $disponible["MINIATURA_2"] ?>" alt=""></a>
                   </div>
            
-                <?php if (floatval($disponible["PRECIO_PROMO"]) > 0) { ?>
+                <?php if (floatval($disponible["PRECIO_PROMO"]) > 0 && floatval($disponible["PRECIO_PROMO"]) < floatval($disponible["PRECIO"])) { ?>
                   <div style="position: absolute; top: 10px; right: 10px; background-color: red; color: white; padding: 1px 5px; font-weight: bold; font-size: 12px">
-                    OFERTA!
+                  OFERTA!
                   </div>
                 <?php } ?>
                 </div>
@@ -425,7 +425,7 @@ $_SESSION["tiempo"] = time();
                       <p class="font-weight-400 no-margin pink-text text-right">Precio total c/<strong>tarjeta de crédito</strong></p>
                         <div class="d-flex flex-row justify-content-end">
 
-                        <h2 class="font-weight-600" <?php if (floatval($disponible["PRECIO_PROMO"]) > 0) echo 'style="text-decoration: line-through; font-size: 18px; margin-right: 20px;"'; ?>><?php
+                        <h2 class="font-weight-600" <?php if (floatval($disponible["PRECIO_PROMO"]) > 0 && floatval($disponible["PRECIO_PROMO"]) < floatval($disponible["PRECIO"])) echo 'style="text-decoration: line-through; font-size: 18px; margin-right: 20px;"'; ?>><?php
 
                                       $precioTotal = "Consultar";
                                       if (floatval($disponible["PRECIO"]) > 0) {
@@ -437,7 +437,7 @@ $_SESSION["tiempo"] = time();
                                       ?></h2>
                                       <h2 class="font-weight-600"> 
                                       <?php
-                                      if (floatval($disponible["PRECIO_PROMO"]) > 0) {
+                                      if (floatval($disponible["PRECIO_PROMO"]) > 0 && floatval($disponible["PRECIO_PROMO"]) < floatval($disponible["PRECIO"])) {
                                       echo "$ " . number_format($disponible["PRECIO_PROMO"], 0, ',', '.');
                                       }
                                       ?>

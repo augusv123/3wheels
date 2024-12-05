@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <div class="col-10"><h3> Configuracion</h3> </div>
               <div class="col-2">
               
-              <button type="button" class="btn btn-primary pull-right" style="color:white ;" onclick="window.location.href='factor_dia.php?t=0'">Nuevo</button>  </div>
+              <!-- <button type="button" class="btn btn-primary pull-right" style="color:white ;" onclick="window.location.href='factor_dia.php?t=0'">Nuevo</button>  </div> -->
             </div>
             
         </div>
