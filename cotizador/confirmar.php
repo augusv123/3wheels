@@ -259,6 +259,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                     case "Cronos":
                     echo "2";
                     break;
+                    case "H1 Premium":
+                      echo "6";
+                      break;
 
                     default:
                     echo "1";;
@@ -275,6 +278,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                     case "Kwid":
                     echo "1";
                     break;
+                    case "H1 Premium":
+                      echo "4";
+                      break;
                     
                     default:
                     echo "2";;
@@ -289,7 +295,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
                 SI</div>
               <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> <img src="img/ico-cambios.png" alt="Caja de Cambios"/><br>
                 MT</div>
-             
+                <?php
+                      if($disponible["MODELO"] == 'H1 Premium'){
+                      ?>
+
+                  
+
+
+                      <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> 
+                        <img width="20" src="img/people.png" alt="capacidad" />
+                      <br>
+                      12
+                      </div>
+                      <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> 
+                        <img width="20" src="img/airbag.png" alt="airbag" />
+                      <br>
+                      SI
+                      </div>
+
+                      <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> 
+                        <img width="20" src="img/car-steering-wheel.png" alt="direccion" />
+                      <br>
+                      HD
+                      </div>
+
+                      <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> 
+                        <img width="20" src="img/car.png" alt="abs" />
+                      <br>
+                      SI
+                      </div>
+
+
+                      <?php
+                
+                      }
+                      ?>
+
             </div>
           </div>
   
@@ -746,8 +787,7 @@ const result = value=> String(value).toLocaleString('es-ar', {
       }
 
       if (document.getElementById('g-recaptcha-response').value.trim() == '') {
-        alert("Confirme que no es un robot");
-        return true;
+    
       }
 
       form.btnEnviar.disabled = true;

@@ -64,16 +64,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cotizacion = sp("RESERVAS_COTIZAR_V3(" . $cantidad . ",'" . $auto["MODELO"] . "','" . $_POST["txtRetiro"] . "')");
 
     $precioTotal = "0";
+    $precioTotalPromo = "0";
 
     if (count($cotizacion) > 0) {
       $precioTotal = $cotizacion[0]["PRECIO"];
       $precioTotal += $lugar_costo;
+      if($cotizacion[0]["PRECIO_PROMO"]){
+ 
+        $precioTotalPromo = $cotizacion[0]["PRECIO_PROMO"];
+        $precioTotalPromo += $lugar_costo;
+      }
     };
 
 
     $disponibles[$indice]["PRECIO"] = $precioTotal;
+    $disponibles[$indice]["PRECIO_PROMO"] = $precioTotalPromo;
     $indice = $indice + 1;
   }
+
   $_SESSION["disponibles"] = $disponibles;
   $_SESSION["fechaDesde"] = $_POST["txtRetiro"];
   $_SESSION["horaDesde"] = $_POST["txtRetiroHora"];

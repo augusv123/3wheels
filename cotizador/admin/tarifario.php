@@ -64,11 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
    
     if($mensaje==""){
-
+ 
         foreach($modelos as $modelo){
 
-            sp_exec( "PRECIOS_ACTUALIZAR( ".$identificador.",'".$modelo["MODELO"]."',".$_POST[underscore($modelo["MODELO"])].")" );
-   
+            sp_exec( "PRECIOS_ACTUALIZAR( ".$identificador.",'".$modelo["MODELO"]."',".$_POST[underscore($modelo["MODELO"])].",".$_POST[underscore($modelo["MODELO"]).'_PROMO'].")" );
+            // sp_exec( "PRECIOS_ACTUALIZAR( ".$identificador.",'".$modelo["MODELO"]."',".$_POST[underscore($modelo["MODELO"])].")" );
+
        }
    
    
@@ -190,25 +191,29 @@ else{
                         <tr>
                             <th data-sortable="" style="width: 200px;border-bottom:transparent !important;"><a href="#" class="dataTable-sorter">MODELO</a></th>
                             <th data-sortable="" style="border-bottom:transparent !important;" ><a href="#" class="dataTable-sorter">PRECIO BASE</a></th>
+                            <th data-sortable="" style="border-bottom:transparent !important;" ><a href="#" class="dataTable-sorter">PRECIO PROMO</a></th>
                           
                            
                         </tr>
                     </thead>
                     <tbody>
                     <?php 
-                    
+
                       foreach($modelos as $modelo){
 
                       
                          $precio=0; 
+                         $precio_promo=0; 
 
                          if($_GET["t"]!="0"){
 
                             foreach($data as $tarifa){ 
-                            
+                           
                                 if($tarifa["MODELO"]==$modelo["MODELO"]){
                                      $precio=$tarifa["PRECIO"];
+                                     $precio_promo=$tarifa["PRECIO_PROMO"];
                                 }
+                          
                          }
 
 
@@ -218,6 +223,7 @@ else{
                         <tr style="border: 0px solid transparent;">
                             <td><?php echo $modelo["MODELO"] ?></td>
                             <td><input name="<?php echo underscore($modelo["MODELO"]) ?>" type="text" value=" <?php echo $precio ?>" class="form-control ml-2" /> </td>
+                            <td><input name="<?php echo underscore($modelo["MODELO"] . '_PROMO') ?>" type="text" value=" <?php echo $precio_promo ?>" class="form-control ml-2" /> </td>
                         </tr>
                     <?php } ?>
                     </tbody>

@@ -7729,3 +7729,57 @@ ADR;TYPE=home:;;'localidad',;;;;
 ADR;TYPE=work:;;7,;;;;
 CATEGORIES:A Revisar
 BDAY:2024/10/30
+BEGIN:VCARD
+VERSION:3.0
+N:'augusto',
+EMAIL;TYPE=INTERNET;TYPE=HOME:'augustovidal94@gmail.com',
+TEL;TYPE=home:'01149144220',
+ADR;TYPE=home:;;'localidad',;;;;
+ADR;TYPE=work:;;9,;;;;
+CATEGORIES:A Revisar
+BDAY:2024/11/12
+BEGIN:VCARD
+VERSION:3.0
+N:'fernando sanjiao',
+EMAIL;TYPE=INTERNET;TYPE=HOME:'esunaprueba@gmail.com',
+TEL;TYPE=home:'1149144220',
+ADR;TYPE=home:;;'localidad',;;;;
+ADR;TYPE=work:;;9,;;;;
+CATEGORIES:A Revisar
+BDAY:2024/11/12
+BEGIN:VCARD
+VERSION:3.0
+N:'augusto',
+EMAIL;TYPE=INTERNET;TYPE=HOME:'fernando@prueba.com',
+TEL;TYPE=home:'01149144220',
+ADR;TYPE=home:;;'localidad',;;;;
+ADR;TYPE=work:;;7,;;;;
+CATEGORIES:A Revisar
+BDAY:2024/11/21
+BEGIN:VCARD
+VERSION:3.0
+N:'Santiago',
+EMAIL;TYPE=INTERNET;TYPE=HOME:'pruebamail@tesrer.com',
+TEL;TYPE=home:'probador',
+ADR;TYPE=home:;;'localidad',;;;;
+ADR;TYPE=work:;;3,;;;;
+CATEGORIES:A Revisar
+BDAY:2024/11/21
+BEGIN:VCARD
+VERSION:3.0
+N:'augusto',
+EMAIL;TYPE=INTERNET;TYPE=HOME:'augustovidal94@gmail.com',
+TEL;TYPE=home:'1149144220',
+ADR;TYPE=home:;;'localidad',;;;;
+ADR;TYPE=work:;;1,;;;;
+CATEGORIES:A Revisar
+BDAY:2024/11/21
+BEGIN:VCARD
+VERSION:3.0
+N:'augusto',
+EMAIL;TYPE=INTERNET;TYPE=HOME:'augustovidal94@gmail.com',
+TEL;TYPE=home:'01149144220',
+ADR;TYPE=home:;;'localidad',;;;;
+ADR;TYPE=work:;;1,;;;;
+CATEGORIES:A Revisar
+BDAY:2024/11/21

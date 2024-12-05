@@ -101,6 +101,7 @@ else{
                         <tr>
                             <th data-sortable="" style="width: 200px;"><a href="#" class="dataTable-sorter">MODELO</a></th>
                             <th data-sortable="" ><a href="#" class="dataTable-sorter">PRECIO BASE</a></th>
+                            <th data-sortable="" ><a href="#" class="dataTable-sorter">PRECIO PROMO</a></th>
                           
                            
                         </tr>
@@ -110,6 +111,7 @@ else{
                         <tr>
                             <td><?php echo $tarifa["MODELO"] ?></td>
                             <td>$ <?php echo $tarifa["PRECIO"] ?></td>
+                            <td>$ <?php echo $tarifa["PRECIO_PROMO"] ?></td>
                         </tr>
                     <?php } ?>
                     </tbody>

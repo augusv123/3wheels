@@ -43,7 +43,8 @@ switch ($tipo) {
         $cantidad=($cantidadConsulta[0]["CANTIDAD"]/10);
         if(fmod($cantidadConsulta[0]["CANTIDAD"],10)>0)$cantidad++;
         
-        $data=sp('RESERVAS_FILTRAR("'.$valor.'",'.($pagina*10).')');
+        $data=sp('RESERVAS_FILTRAR_V2("'.$valor.'",'.($pagina*10).')');
+        
         $tipoTitulo="Reservas";
         break;
 
@@ -89,7 +90,10 @@ switch ($tipo) {
                             <th data-sortable="" style="width: 150px;"><a href="#" class="dataTable-sorter">Retiro</a></th>
                             <th data-sortable="" style="width: 150px;"><a href="#" class="dataTable-sorter">Entrega</a></th>
                             <th data-sortable="" ><a href="#" class="dataTable-sorter">Lugar</a></th>
-                            <th data-sortable="" style="width: 150px;text-align: right;"><a href="#" class="dataTable-sorter">Precio</a></th>
+                            <th data-sortable="" ><a href="#" class="dataTable-sorter">Precio</a></th>
+                            <th data-sortable="" style="width: 150px;"><a href="#" class="dataTable-sorter">Cliente</a></th>
+                            <th data-sortable="" style="width: 150px;"><a href="#" class="dataTable-sorter">Teléfono</a></th>
+                            <th data-sortable="" style="width: 150px;"><a href="#" class="dataTable-sorter">CORREO</a></th>
 
                             <?php if($tipo==8){?>  <th data-sortable="" style="width: 100px;"><a href="#" class="dataTable-sorter">Estado</a></th>  <?php } ?>
                         
@@ -101,21 +105,25 @@ switch ($tipo) {
 
                          foreach($data as $reserva)
                          {
+                        
 
                           $retiro= date_create($reserva["FECHA_RETIRO"]);
                           $entrega= date_create($reserva["FECHA_ENTREGA"]);
                          
 
                          ?>
-                          <tr class="filaReserva" onclick="javascript:window.location.href='reserva.php?r=<?php echo $reserva['ID'] ?>'">
+                          <tr class="filaReserva" onclick="javascript:window.location.href='nueva-reserva.php?r=<?php echo $reserva['ID'] ?>'">
                           <td><?php echo $reserva["ID"] ?></td>
                           <td><?php echo $reserva["MODELO"] ?></td>
                             <td><?php echo $reserva["PATENTE"] ?></td>
                             <td><?php echo date_format($retiro, 'd-m-Y') ?></td>
                             <td><?php echo date_format($entrega, 'd-m-Y') ?></td>
                             <td><?php echo $lugar[$reserva["LUGAR"]] ?></td>
-                            <td style="text-align: right;"><?php echo "$ ".number_format(sp("RESERVAS_OBTENER_PRECIO(".$reserva["ID"].")")[0]["total"], 0, ',', '.') ?></td>
-                            
+                            <td><?php echo "$ ".number_format($reserva['PRECIO'], 0, ',', '.') ?></td>
+                            <td><?php echo isset($reserva["NOMBRE"]) ? $reserva["NOMBRE"] : '' ?></td>
+                            <td><?php echo isset($reserva["TELEFONO"]) ? $reserva["TELEFONO"] : '' ?></td>
+                            <td><?php echo isset($reserva["CORREO"]) ? $reserva["CORREO"] : '' ?></td>
+                            <!-- <td style="text-align: right;"><?php echo "$ ".number_format(sp("RESERVAS_OBTENER_PRECIO(".$reserva["ID"].")")[0]["PRECIO"], 0, ',', '.') ?></td> -->
                             <?php if($tipo==8){ echo "<td>".$estados[$reserva["ESTADO"]]."</td>";} ?>
                         </tr>
 

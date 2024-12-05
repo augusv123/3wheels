@@ -67,7 +67,22 @@ $_SESSION["tiempo"] = time();
             <script src="js/html5shiv.js"></script>
         <![endif]-->
 
-  <style></style>
+  <style>
+    .on-sale-flex {
+      background: #5aa5e6;
+    color: #fff;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 2px 12px;
+    margin-right: 10px;
+    }
+    @media (max-width: 768px) {
+      .text-md-right {
+        text-align: right;
+      }
+    }
+  </style>
 
   <script>
     (function(i, s, o, g, r, a, m) {
@@ -101,8 +116,18 @@ $_SESSION["tiempo"] = time();
     })(window, document, 'script', 'dataLayer', 'GTM-PKGSW3C');
   </script>
   <!-- End Google Tag Manager -->
-<!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=AW-802895878"></script> 
-<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-802895878'); </script> </head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-802895878"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'AW-802895878');
+  </script>
+</head>
 
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -219,6 +244,12 @@ $_SESSION["tiempo"] = time();
                     <a class="ocul" href="<?php echo $disponible["MINIATURA_1"] ?>"><img src="<?php echo $disponible["MINIATURA_1"] ?>" alt=""></a>
                     <a class="ocul" href="<?php echo $disponible["MINIATURA_2"] ?>"><img src="<?php echo $disponible["MINIATURA_2"] ?>" alt=""></a>
                   </div>
+           
+                <?php if (floatval($disponible["PRECIO_PROMO"]) > 0) { ?>
+                  <div style="position: absolute; top: 10px; right: 10px; background-color: red; color: white; padding: 1px 5px; font-weight: bold; font-size: 12px">
+                    OFERTA!
+                  </div>
+                <?php } ?>
                 </div>
                 <div class="col-12 no-ocultar-div">
                   <div class=" owl-theme dark-pagination owl-no-pagination owl-prev-next-simple owl-carousel2" style="height: auto;">
@@ -264,6 +295,10 @@ $_SESSION["tiempo"] = time();
                           echo "2";
                           break;
 
+                        case "H1 Premium":
+                          echo "6";
+                          break;
+
                         default:
                           echo "1";;
                           break;
@@ -280,6 +315,11 @@ $_SESSION["tiempo"] = time();
                           echo "1";
                           break;
 
+                        case "H1 Premium":
+                          echo "4";
+                          break;
+                         
+
                         default:
                           echo "2";;
                           break;
@@ -294,39 +334,60 @@ $_SESSION["tiempo"] = time();
                     <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> <img src="img/ico-cambios.png" alt="Caja de Cambios" /><br>
                       MT</div>
 
+                      <?php
+                      if($disponible["MODELO"] == 'H1 Premium'){
+                      ?>
 
+                  
+
+
+                      <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> 
+                        <img width="20" src="img/people.png" alt="capacidad" />
+                      <br>
+                      12
+                      </div>
+                      <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> 
+                        <img width="20" src="img/airbag.png" alt="airbag" />
+                      <br>
+                      SI
+                      </div>
+
+                      <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> 
+                        <img width="20" src="img/car-steering-wheel.png" alt="direccion" />
+                      <br>
+                      HD
+                      </div>
+
+                      <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> 
+                        <img width="20" src="img/car.png" alt="abs" />
+                      <br>
+                      SI
+                      </div>
+
+
+                      <?php
+                
+                      }
+                      ?>
 
 
                   </div>
                 </div>
               </div>
             </div>
-            <!-- end left part -->
-            <!-- right part -->
+
             <div class="col-md-7 col-sm-6 border-left2">
-              <!-- jobs opening position -->
               <div class="clearfix">
                 <div class="col-md-7 col-sm-12 position-relative">
-                  <!-- product rating -->
                   <div class="row margin-bottom-seven d-md-none">
-                    <!-- <div class="col-md-4 col-xs-4">
-                      <img src="https://www.3wheels.com.ar/cotizador/img/logo-cotizador.png" alt="" width="75" height="46">
-                    </div> -->
-                    <!-- <div class="col-md-8 col-xs-8">
-                      <div class="col-md-2 rating no-margin no-margin-top">
-                        <h2 class="font-weight-600">4.2</h2>
-                      </div>
-                      <div class="col-md-7 col-sm-12 position-relative">
-                        <i class="fa fa-star pink-text"></i><i class="fa fa-star pink-text"></i><i class="fa fa-star pink-text"></i><i class="fa fa-star pink-text"></i><i class="fa fa-star-o pink-text"></i><br><span class="rating-text text-uppercase">excelente</span>
-                      </div>
-                    </div> -->
+
                     <div class="col-md-12 no-margin-left no-margin-right">
                       <div class="img-container">
                         <img src="https://www.3wheels.com.ar/cotizador/img/logo1.png" alt="">
                       </div>
                     </div>
                   </div>
-                  <!-- end product rating -->
+
                   <p class="margen3"></p>
                   <div class="row margin-top margin-bottom-seven">
                     <div class="col-md-12 no-margin-left no-margin-right">
@@ -337,11 +398,13 @@ $_SESSION["tiempo"] = time();
                   </div>
                   <div class="row margin-top d-md-none">
                     <div class="col-md-10 text-xs">
-                      <p style="color:#2142a0"><strong>¿Tenés dudas?</strong> Hacé <strong>Click</strong> en el logo de Whatsapp para comunicarte con nosotros. </p>
+                      <!-- <p style="color:#2142a0"><strong>¿Tenés dudas?</strong> Hacé <strong>Click</strong> en el logo de Whatsapp para comunicarte con nosotros. </p> -->
+                      <p style="color:#2142a0"><strong> Abona al retirar el vehículo</strong> </p>
+                     
                     </div>
                   </div>
                   <div class="row margin-top margin-bottom-seven">
-                    <div class="col-md-12 " style="display : flex; flex-direction : column;">
+                    <div class="col-md-12 text-md-right" style="display : flex; flex-direction : column;" >
                       <p class="font-weight-400 no-margin pink-text">Cantidad de días seleccionados:
 
                       </p>
@@ -353,56 +416,70 @@ $_SESSION["tiempo"] = time();
                         ?>
                       </h2>
                     </div>
+                    
                   </div>
                 </div>
-
                 <div class="col-md-5 col-sm-12 text-right">
-
-
-
                   <div class="row margin-bottom-seven">
-                    <div class="col-md-12 text-md-left">
-                      <p class="font-weight-400 no-margin pink-text">Precio total c/<strong>tarjeta de crédito</strong></p>
-                      <h2 class="font-weight-600"><?php
+                    <div class="col-md-12 text-md-left d-flex justify-content-end flex-column align-items-end" style="flex-direction: column; align-items: end;">
+                      <p class="font-weight-400 no-margin pink-text text-right">Precio total c/<strong>tarjeta de crédito</strong></p>
+                        <div class="d-flex flex-row justify-content-end">
 
-                                                  $precioTotal = "Consultar";
-                                                  if (floatval($disponible["PRECIO"]) > 0) {
-                                                    echo "$ " . number_format($disponible["PRECIO"], 0, ',', '.');
-                                                  } else {
-                                                    echo $precioTotal;
-                                                  }
-                                                  ?></h2>
+                        <h2 class="font-weight-600" <?php if (floatval($disponible["PRECIO_PROMO"]) > 0) echo 'style="text-decoration: line-through; font-size: 18px; margin-right: 20px;"'; ?>><?php
 
-                    </div>
+                                      $precioTotal = "Consultar";
+                                      if (floatval($disponible["PRECIO"]) > 0) {
+                                      echo "$ " . number_format($disponible["PRECIO"], 0, ',', '.');
+                                      } else if(floatval($disponible["PRECIO"]) <= 0 && floatval($disponible["PRECIO_PROMO"]) <= 0){ 
+                                      echo $precioTotal;
+                                      }
+                                      
+                                      ?></h2>
+                                      <h2 class="font-weight-600"> 
+                                      <?php
+                                      if (floatval($disponible["PRECIO_PROMO"]) > 0) {
+                                      echo "$ " . number_format($disponible["PRECIO_PROMO"], 0, ',', '.');
+                                      }
+                                      ?>
+                                      </h2>
+                                      </div>
+
+                      </div>
                   </div>
-                  <div class="row margin-bottom-three">
+                   
+                    <div class="row margin-bottom-three">
                     <div class="col-md-12 text-md-left">
-                      <span class="onsale onsale-style-2  ocultar-div" style="margin-left : -50px;">15% DTO</span>
-                      <p class="font-weight-400 no-margin pink-text">Precio total <strong>contado efectivo</strong></p>
-                      <h2 class="font-weight-600"><?php
+              
+                    
+                      <p class="font-weight-400 no-margin pink-text text-right">Precio total 
+                      <strong>contado efectivo</strong></p>
+                      <div class="d-flex justify-content-end align-items-center" style="justify-content: end;
+    margin-top: 10px;
+    margin-bottom: 40px;
+">
+                      <span class='on-sale-flex  ' >15% DTO</span>
 
-                                                  if (floatval($disponible["PRECIO"]) > 0) {
-
-                                                    echo "$ " . number_format($disponible["PRECIO"] * 0.85, 0, ',', '.');
-                                                  } else {
-
-                                                    echo $precioTotal;
-                                                  }
-
-                                                  ?>
-                                                  
-                      <span class="nuevo-onsale no-ocultar-div">15% DTO</span>
-                                                
-                                                </h2>
-
-                      <span class="text-xs black-text">abona al retirar el vehículo</span>
-
+                        
+                        <h2 class="font-weight-600"><?php
+  
+                                      if (floatval($disponible["PRECIO"]) > 0) {
+  
+                                      echo "$ " . number_format($disponible["PRECIO"] * 0.85, 0, ',', '.');
+                                      } else {
+  
+                                      echo $precioTotal;
+                                      }
+  
+                                      ?>
+  
+                        </h2>
+                      </div>
                     </div>
-
-                  </div>
+                    </div>
+               
+                      
                   <div class="row margin-bottom-seven margin-md-3">
                     <div class="col-md-12 text-md-left">
-
                       <form class="w-md-100" method="POST" name="frmDisponibles" action="confirmar">
                         <a href="javascript:continuar('<?php echo $disponible["MODELO"] ?>')" class="btn btn-round btn-black btn-small margin-four no-margin-bottom w-md-100 text-md-center">Seleccionar</a>
                         <input type="hidden" value="" name="modelo">
@@ -411,21 +488,15 @@ $_SESSION["tiempo"] = time();
                   </div>
                 </div>
               </div>
-              <!-- end jobs opening position -->
-
             </div>
-            <!-- end right part -->
           </div>
-
           <div class="row padding-one border-bottom border-left2 border-right bg-white">
-            <!-- related products slider -->
             <div class="col-md-11 col-sm-8 dividers-header double-line text-left">
               <div class="subheader bg-white">
                 <p class="letter-spacing-1 font-weight-600 margin-two pink-text text-uppercase">Incluído en el Precio</p>
               </div>
             </div>
             <div class="owl-carousel ocultar-div owl-theme dark-pagination owl-no-pagination owl-prev-next-simple " style="opacity: 1; display: block;">
-              <!-- shop item -->
               <div class="owl-wrapper-outer">
                 <div class="owl-wrapper" style="width: 3940px; left: 0px; display: block;">
                   <div class="owl-item" style="width: 394px;">
@@ -471,10 +542,6 @@ $_SESSION["tiempo"] = time();
                   </div>
                 </div>
               </div>
-
-
-
-
             </div>
             <div class="owl-carousel2 no-ocultar-div owl-theme dark-pagination owl-no-pagination owl-prev-next-simple " style="opacity: 1; display: block;">
               <div class="home-product text-center position-relative overflow-hidden">
@@ -483,8 +550,6 @@ $_SESSION["tiempo"] = time();
                 <span class="product-name">Conductor adicional <strong>sin cargo</strong></span>
                 <div class="owl-next"><i class="fa fa-angle-right"></i></div>
               </div>
-
-
               <div class="home-product text-center position-relative overflow-hidden">
                 <div class="owl-prev"><i class="fa fa-angle-left"></i></div>
                 <img src="https://www.3wheels.com.ar/cotizador/img/ico-seguro-vehiculo.png" alt="">
@@ -667,7 +732,7 @@ $_SESSION["tiempo"] = time();
     })
     $(document).ready(function() {
       $(".owl-carousel2").owlCarousel({
-        loop:true
+        loop: true
       });
     });
   </script>

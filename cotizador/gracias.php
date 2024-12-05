@@ -6,6 +6,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 include('admin/app/database.php');
+require '../vendor/autoload.php'; // Asegúrate de tener el autoload de Composer
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 
 if($_SERVER['REQUEST_METHOD'] === 'GET') {
 
@@ -131,6 +135,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION["reserva"])) {
   $Sillabebe = obtenerValor("txtSilla");
 
 
+  
+
   if($Sillabebe == 1){
     $Sillabebe = "Incluida";
   }
@@ -149,28 +155,83 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION["reserva"])) {
   $Totaldopcionales = obtenerValor("totaldopcionales");
 
   
-  try{
+//   try{
 
-    $archivo=fopen('DatosPersonales.vcf', 'a') or die("can't open file");
+//     $archivo=fopen('DatosPersonalesCotizador.vcf', 'a') or die("can't open file");
 
-    $vcard="BEGIN:VCARD\n";
-    $vcard.="VERSION:3.0\n";
-    $vcard.="N:".$Nombre."\n";
-    $vcard.="EMAIL;TYPE=INTERNET;TYPE=HOME:".$Email."\n";
-    $vcard.="TEL;TYPE=home:".$Telefono."\n";
-    $vcard.="ADR;TYPE=home:;;".$Localidad.";;;;\n";
-    $vcard.="ADR;TYPE=work:;;".$PuntoRetiro.";;;;\n";
-    $vcard.="CATEGORIES:A Revisar\n";
-    $vcard.="BDAY:".date("Y/m/d")."\n";
-    fwrite($archivo,$vcard);
-    fclose($archivo);
+//     $vcard="BEGIN:VCARD\n";
+//     $vcard.="VERSION:3.0\n";
+//     $vcard.="N:".$Nombre."\n";
+//     $vcard.="EMAIL;TYPE=INTERNET;TYPE=HOME:".$Email."\n";
+//     $vcard.="TEL;TYPE=home:".$Telefono."\n";
+//     $vcard.="ADR;TYPE=home:;;".$Localidad.";;;;\n";
+//     $vcard.="ADR;TYPE=work:;;".$PuntoRetiro.";;;;\n";
+//     $vcard.="CATEGORIES:A Revisar\n";
+//     $vcard.="BDAY:".date("Y/m/d")."\n";
+//     fwrite($archivo,$vcard);
+//     fclose($archivo);
 
- } catch (Exception $e) {
+//  } catch (Exception $e) {
  
-     echo 'Caught exception: ',  $e->getMessage(), "\n";
-     exit;
+//      echo 'Caught exception: ',  $e->getMessage(), "\n";
+//      exit;
  
- }
+//  }
+
+ try {
+  // Ruta al archivo Excel existente
+  $fileName = 'DatosPersonalesCotizador.xlsx';
+
+  // Comprobar si el archivo ya existe
+  if (file_exists($fileName)) {
+    // Cargar el archivo Excel existente
+    $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($fileName);
+    $sheet = $spreadsheet->getActiveSheet();
+  } else {
+    // Si el archivo no existe, crear uno nuevo
+    $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+    
+    // Definir los encabezados de las columnas solo si el archivo es nuevo
+    $sheet->setCellValue('A1', 'Nombre');
+    $sheet->setCellValue('B1', 'Email');
+    $sheet->setCellValue('C1', 'Teléfono');
+    $sheet->setCellValue('D1', 'Localidad');
+    $sheet->setCellValue('E1', 'Punto de Retiro');
+    $sheet->setCellValue('F1', 'Auto');
+    $sheet->setCellValue('G1', 'Fecha de Creación');
+  }
+
+  // Obtener la siguiente fila vacía
+  $lastRow = $sheet->getHighestRow() + 1; // Conseguir la siguiente fila vacía
+
+  // Datos del contacto
+  $nombre = $Nombre; // Reemplaza con el valor real
+  $email = $Email; // Reemplaza con el valor real
+  $telefono = $Telefono; // Reemplaza con el valor real
+  $localidad = $Localidad; // Reemplaza con el valor real
+  $puntoRetiro = $PuntoRetiro; // Reemplaza con el valor real
+
+  // Insertar datos en la nueva fila
+  $sheet->setCellValue('A' . $lastRow, obtenerValor("txtNombre"));
+  $sheet->setCellValue('B' . $lastRow, obtenerValor("txtCorreo"));
+  $sheet->setCellValue('C' . $lastRow, obtenerValor("txtTelefono"));
+  $sheet->setCellValue('D' . $lastRow, obtenerValor("txtLocalidad"));
+  $sheet->setCellValue('E' . $lastRow, $lugar_nombre);
+  $sheet->setCellValue('F' . $lastRow, $reserva["MODELO"]);
+  $sheet->setCellValue('G' . $lastRow, date("Y-m-d"));
+
+  // Guardar el archivo Excel con los nuevos datos
+  $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+  $writer->save($fileName);
+
+  echo "Archivo Excel actualizado exitosamente: $fileName";
+
+} catch (Exception $e) {
+  echo 'Se produjo una excepción: ', $e->getMessage();
+  exit;
+}
+
 
   if($error==""){
 
