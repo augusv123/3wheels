@@ -12,6 +12,11 @@ $lugares_de_retiro = sp('VerTodosLosLugaresRetiro()');
 $lugar_nombre = null;
 $lugar_costo = null;
 
+$valorSillaBebe = SP('OBTENER_CONFIGURACION_POR_NOMBRE("VALOR_SILLA_BEBE")');
+$coberturaPremium = SP('OBTENER_CONFIGURACION_POR_NOMBRE("COBERTURA_PREMIUM")');
+$valorSillaBebe = isset($valorSillaBebe[0]['VALOR']) ? $valorSillaBebe[0]['VALOR'] : 0;
+$coberturaPremium = isset($coberturaPremium[0]['VALOR']) ? $coberturaPremium[0]['VALOR'] : 0;
+
 // Loop through the result to find the location with ID 3
 foreach ($lugares_de_retiro as $lugar) {
     if ($lugar['ID'] == $_SESSION["lugarRetiro"]) {
@@ -221,9 +226,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
         <div class="col-md-6 col-sm-6">
           <div class="clearfix ">
             <div class=" ocultar-div col-md-7  col-sm-12 col-xs-6 zoom-gallery sm-margin-bottom-ten"> <a href="<?php echo $reserva["IMAGEN"] ?>"><img src="<?php echo $reserva["IMAGEN"] ?>" alt=""/></a>
-            <div class="products-thumb text-center"> <a href="<?php echo $reserva["MINIATURA_1"] ?>"><img src="<?php echo $reserva["MINIATURA_1"] ?>" alt=""/></a> 
-            <a href="<?php echo $reserva["MINIATURA_2"] ?>"><img src="<?php echo $reserva["MINIATURA_2"] ?>" alt=""/></a><a href="<?php echo $reserva["MINIATURA_3"] ?>"><img src="<?php echo $reserva["MINIATURA_3"] ?>" alt=""/></a> </div>
-          </div>
+              <div class="products-thumb text-center"> <a href="<?php echo $reserva["MINIATURA_1"] ?>"><img src="<?php echo $reserva["MINIATURA_1"] ?>" alt=""/></a> 
+              <a href="<?php echo $reserva["MINIATURA_2"] ?>"><img src="<?php echo $reserva["MINIATURA_2"] ?>" alt=""/></a><a href="<?php echo $reserva["MINIATURA_3"] ?>"><img src="<?php echo $reserva["MINIATURA_3"] ?>" alt=""/></a> </div>
+              <?php if (floatval($reserva["PRECIO_PROMO"]) > 0 && floatval($reserva["PRECIO_PROMO"]) < floatval($reserva["PRECIO"])) { ?>
+                    <div style="position: absolute; top: 10px; right: 10px; background-color: red; color: white; padding: 1px 5px; font-weight: bold; font-size: 12px">
+                    OFERTA!
+                    </div>
+                  <?php } ?>
+            </div>
           <div class="col-12 no-ocultar-div">
                   <div class=" owl-theme dark-pagination owl-no-pagination owl-prev-next-simple owl-carousel2" style="height: auto;">
 
@@ -397,8 +407,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
         </div>
         <div class="col-md-10 col-sm-12 col-md-offset-2 padding-two">
           <ul class="flat-list flat-list-icon">
-            <li>       <input style="margin-right: 0.5rem;" name="chkCobertura" type="checkbox" id="chkCobertura" value="0.2" onclick="javascript:recalcularOpcionales()"></i><strong>Cobertura Premium:</strong> Reduce el valor de la franquicia y los cargos por daños al vehículo.</li>
-              <li> <input style="margin-right: 0.5rem;" name="chkSillaBebe" type="checkbox" id="chkSillaBebe" value="3990" onclick="javascript:recalcularOpcionales()"></i><strong>Silla bebe</strong></li>
+            <li><input style="margin-right: 0.5rem;" name="chkCobertura" type="checkbox" id="chkCobertura" value="<?php echo $coberturaPremium; ?>" onclick="javascript:recalcularOpcionales()"></i><strong>Cobertura Premium:</strong> Reduce el valor de la franquicia y los cargos por daños al vehículo.</li>
+            <li><input style="margin-right: 0.5rem;" name="chkSillaBebe" type="checkbox" id="chkSillaBebe" value="<?php echo $valorSillaBebe; ?>" onclick="javascript:recalcularOpcionales()"></i><strong>Silla bebe</strong></li>
 			  
 			  <li><input style="margin-right: 0.5rem;" type="checkbox"> <i class="icon-map-pin" style="color:#5aa5e6"></i><strong>Entrega a Domicilio: </strong>Con cargo extra, a determinar según dirección de entrega.</li>
          
@@ -464,9 +474,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
           <p class="text-xs font-weight-400 no-margin text-left">Precio Alquiler </p>
         </div>
         <div class="col-md-4 col-xs-4">
-        <p class="text-xs font-weight-400 no-margin text-right" id="precio"></p>
+        <p class="text-xs font-weight-400 no-margin text-right" id="precio" style="<?php if (floatval($reserva["PRECIO_PROMO"]) > 0 && floatval($reserva["PRECIO_PROMO"]) < floatval($reserva["PRECIO"])) { echo 'text-decoration: line-through;'; } ?>"></p>
         </div>
       </div>
+      <?php if (floatval($reserva["PRECIO_PROMO"]) > 0 && floatval($reserva["PRECIO_PROMO"]) < floatval($reserva["PRECIO"])) { ?>
+        <div class="row margin-bottom-two">
+          <div class="col-md-8  col-xs-8">
+            <p class="text-xs font-weight-400 no-margin text-left pink-text">Precio Promo </p>
+          </div>
+          <div class="col-md-4 col-xs-4">
+          <p class="text-xs font-weight-400 no-margin text-right pink-text" id="precio_promo"><?php echo "$ " . number_format($reserva["PRECIO_PROMO"], 0, ',', '.'); ?></p>
+          </div>
+        </div>
+      <?php } ?>
       <div class="row margin-bottom-two">
         <div class="col-md-8 col-xs-8">
           <p class="text-xs font-weight-400 no-margin text-left">Cantidad de días de alquiler</p>
@@ -499,16 +519,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-6">
           <p class="font-weight-600 margin-two pink-text" id="totalAbonar"><?php 
-          
-            
-          if(floatval($reserva["PRECIO"])>0){
-
-            echo "$ ".number_format(  $reserva["PRECIO"] , 0, ',', '') ;
-
-          }else{
-
-              echo "Consultar.";
-
+          if (floatval($reserva["PRECIO_PROMO"]) > 0 && floatval($reserva["PRECIO_PROMO"]) < floatval($reserva["PRECIO"])) {
+            echo "$ " . number_format($reserva["PRECIO_PROMO"], 0, ',', '.');
+          } else if (floatval($reserva["PRECIO"]) > 0) {
+            echo "$ " . number_format($reserva["PRECIO"], 0, ',', '.');
+          } else {
+            echo "Consultar.";
           }
           
            ?></p>
@@ -715,11 +731,12 @@ const result = value=> String(value).toLocaleString('es-ar', {
     descuento=<?php  echo  sp("CONFIGURACION_OBTENER_DESCUENTO_EFECTIVO()")[0]["VALOR"]; ?>;
     cantidad=<?php  echo $_SESSION["cantidad"] ?>;
     precio=<?php  
-    
-    if(floatval($reserva["PRECIO"])>0){
-      echo  $reserva["PRECIO"]  ;
-    }else{
-        echo "0";
+    if (floatval($reserva["PRECIO_PROMO"]) > 0 && floatval($reserva["PRECIO_PROMO"]) < floatval($reserva["PRECIO"])) {
+      echo $reserva["PRECIO_PROMO"];
+    } else if (floatval($reserva["PRECIO"]) > 0) {
+      echo $reserva["PRECIO"];
+    } else {
+      echo "0";
     }
     ?>;
 
@@ -787,7 +804,8 @@ const result = value=> String(value).toLocaleString('es-ar', {
       }
 
       if (document.getElementById('g-recaptcha-response').value.trim() == '') {
-    
+        alert("Confirme que no es un robot");
+        return true;
       }
 
       form.btnEnviar.disabled = true;

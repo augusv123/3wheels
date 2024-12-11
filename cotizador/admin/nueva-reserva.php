@@ -1,12 +1,15 @@
 <?php include('app/header.php');
+require '../../vendor/autoload.php'; // Asegúrate de tener el autoload de Composer
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 $reserva;
 
 $descuentoEfectivo = SP('OBTENER_CONFIGURACION_POR_NOMBRE("DESCUENTO_EFECTIVO")');
 $valorSillaBebe = SP('OBTENER_CONFIGURACION_POR_NOMBRE("VALOR_SILLA_BEBE")');
 $coberturaPremium = SP('OBTENER_CONFIGURACION_POR_NOMBRE("COBERTURA_PREMIUM")');
-$descuentoEfectivo = isset($descuentoEfectivo[0]['VALOR']) ? $descuentoEfectivo[0]['VALOR'] : 0;
 $valorSillaBebe = isset($valorSillaBebe[0]['VALOR']) ? $valorSillaBebe[0]['VALOR'] : 0;
 $coberturaPremium = isset($coberturaPremium[0]['VALOR']) ? $coberturaPremium[0]['VALOR'] : 0;
+$descuentoEfectivo = isset($descuentoEfectivo[0]['VALOR']) ? $descuentoEfectivo[0]['VALOR'] : 0;
 
 $autos = sp('AUTOS_CONSULTAR()');
 $autosArray = json_encode($autos);
@@ -28,6 +31,7 @@ $reserva["ESTADO"] == 3;
 
 // $disponibles=sp("RESERVAS_DISPONIBILIDAD('".$_POST["txtRetiro"]."','".$_POST["txtEntrega"]."')");
 $lugares_de_retiro = sp('VerTodosLosLugaresRetiro()');
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $nombre = $_POST['txtNombre'];
@@ -57,13 +61,73 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         sp_exec("RESERVAS_INSERTAR_V2('$nombre', $dni, '$correo', '$telefono', '$localidad', $edad, '$retiro', '$entrega', '$horaRetiro', '$horaEntrega', $lugar, $medioPago, $precio, '$modelo', $mismoLugar, $cobertura, $silla, '$patente', '$observaciones', $estado)");
     }
+
+    try {
+        // Ruta al archivo Excel existente
+        $fileName = '../DatosPersonalesCotizador.xlsx';
+      
+        // Comprobar si el archivo ya existe
+        if (file_exists($fileName)) {
+          // Cargar el archivo Excel existente
+          $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($fileName);
+          $sheet = $spreadsheet->getActiveSheet();
+        } else {
+          // Si el archivo no existe, crear uno nuevo
+          $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+          $sheet = $spreadsheet->getActiveSheet();
+          
+          // Definir los encabezados de las columnas solo si el archivo es nuevo
+          $sheet->setCellValue('A1', 'Nombre');
+          $sheet->setCellValue('B1', 'Email');
+          $sheet->setCellValue('C1', 'Teléfono');
+          $sheet->setCellValue('D1', 'Localidad');
+          $sheet->setCellValue('E1', 'Punto de Retiro');
+          $sheet->setCellValue('F1', 'Auto');
+          $sheet->setCellValue('G1', 'Fecha de Creación');
+          $sheet->setCellValue('H1', 'Edad');
+          $sheet->setCellValue('H1', 'Observaciones');
+        }
+      
+        // Obtener la siguiente fila vacía
+        $lastRow = $sheet->getHighestRow() + 1; // Conseguir la siguiente fila vacía
+        $lugar_nombre = '';
+        foreach ($lugares_de_retiro as $lugarderetiro) {
+            if ($lugarderetiro['ID'] == $lugar) {
+                $lugar_nombre = $lugarderetiro['NOMBRE_LUGAR'];
+                break;
+            }
+        }
+      
+        // Insertar datos en la nueva fila
+        $sheet->setCellValue('A' . $lastRow, $nombre);
+        $sheet->setCellValue('B' . $lastRow, $correo);
+        $sheet->setCellValue('C' . $lastRow, $telefono);
+        $sheet->setCellValue('D' . $lastRow, $localidad);
+        $sheet->setCellValue('E' . $lastRow, $lugar_nombre);
+        $sheet->setCellValue('F' . $lastRow, $modelo);
+        $sheet->setCellValue('G' . $lastRow, date("Y-m-d"));
+        $sheet->setCellValue('H' . $lastRow, $edad == 1 ? 'Mayor de 25 años' : 'Menor de 25 años');
+        $sheet->setCellValue('I' . $lastRow, $observaciones);
+        // Guardar el archivo Excel con los nuevos datos
+        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+        $writer->save($fileName);
+      
+        echo "Archivo Excel actualizado exitosamente: $fileName";
+      
+      } catch (Exception $e) {
+        echo 'Se produjo una excepción: ', $e->getMessage();
+        exit;
+      }
+
     header("Location: reservas.php?t=8");
 } else {
 
     if (!empty($_GET["r"])) {
         $data = sp('RESERVAS_OBTENER(' . $_GET["r"] . ')');
+        if($data){
 
-        $reserva = $data[0];
+            $reserva = $data[0];
+        }
     }
 }
 ?>
@@ -296,13 +360,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <div class="col-md-12 col-12">
                                 <div class="form-group">
                                     <label for="country-floating">Nombre</label>
-                                    <input type="text" class="form-control" name="txtNombre" placeholder="" value="<?php echo $reserva["NOMBRE"] ?>" aria-describedby="button-addon1">
+                                    <input type="text" class="form-control" name="txtNombre" placeholder="" value="<?php echo isset($reserva["NOMBRE"]) ? $reserva["NOMBRE"] : '' ?>" aria-describedby="button-addon1">
                                 </div>
                             </div>
                             <div class="col-md-12 col-12">
                                 <div class="form-group">
                                     <label for="country-floating">Localidad</label>
-                                    <input type="text" class="form-control" name="txtLocalidad" placeholder="" value="<?php echo $reserva["LOCALIDAD"] ?>" aria-describedby="button-addon1">
+                                    <input type="text" class="form-control" name="txtLocalidad" placeholder="" value="<?php echo isset($reserva["LOCALIDAD"]) ? $reserva["LOCALIDAD"] : '' ?>" aria-describedby="button-addon1">
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">

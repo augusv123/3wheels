@@ -74,7 +74,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION["reserva"])) {
   }
 
   
-  
+  $descuentoSP=  sp("CONFIGURACION_OBTENER_DESCUENTO_EFECTIVO()")[0]["VALOR"];
+  $valorSillaBebe = SP('OBTENER_CONFIGURACION_POR_NOMBRE("VALOR_SILLA_BEBE")');
+  $coberturaPremium = SP('OBTENER_CONFIGURACION_POR_NOMBRE("COBERTURA_PREMIUM")');
+  $valorSillaBebe = isset($valorSillaBebe[0]['VALOR']) ? $valorSillaBebe[0]['VALOR'] : 0;
+  $coberturaPremium = isset($coberturaPremium[0]['VALOR']) ? $coberturaPremium[0]['VALOR'] : 0;
   $reserva=$_SESSION["reserva"];
   
   $reserva["PRECIO"] +=  $lugar_costo;
@@ -250,6 +254,26 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION["reserva"])) {
   
         $cotizacion=sp("RESERVAS_COTIZAR_V3(".$_SESSION["cantidad"].",'".$reserva["MODELO"]."','".$_SESSION["fechaDesde"]."')");
         $cotizacion[0]["PRECIO"] += $lugar_costo;
+        $precioCotizacion = $cotizacion[0]["PRECIO"] + $lugar_costo;
+        $precioCotizacionPromo = $cotizacion[0]["PRECIO_PROMO"] + $lugar_costo;
+        $precioCotizacionAAbonar = ($precioCotizacionPromo < $precioCotizacion) ? $precioCotizacionPromo : $precioCotizacion;
+        $totalOpcionales = 0;
+        if ($Sillabebe == "Incluida") {
+            $totalOpcionales += $cantidad * $valorSillaBebe;
+        }
+        if ($Cobertura == "Incluida") {
+            $totalOpcionales +=  $coberturaPremium * $precioCotizacionAAbonar ;
+
+        }
+        $precioCotizacionAAbonar += $totalOpcionales;
+        $decuentoEFT = 0;
+        if (obtenerValor("hddMedioPago") == 1) {
+            $descuentoEfectivo = $precioCotizacionAAbonar * $descuentoSP / 100;
+        } else {
+            $descuentoEfectivo = 0;
+        }
+
+        $precioCotizacionAAbonar = $precioCotizacionAAbonar - $descuentoEfectivo;
 
 
         if($horasExcedentes>5){
@@ -324,42 +348,44 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION["reserva"])) {
         $total=0;
 
         if(!$consultar){
-          $mensaje.="<table style='width:500px; box-sizing: border-box; border-collapse: collapse; border-spacing: 0px;'>";
-          $mensaje.="<tr style='text-align: left;'><td style='border: solid 1px #000000;'><b>ITEM</b></td>";
-          $mensaje.="<td style='text-align: right; border: solid 1px #000000;'><b>PRECIO UNITARIO</b></td>";
-          $mensaje.="<td style='text-align: center; border: solid 1px #000000;'><b>CANTIDAD</b></td>";
-          $mensaje.="<td style='text-align: right; border: solid 1px #000000;'><b>SUBTOTAL</b></td></tr>";
-          foreach($cotizacion as $item){ 
+            $mensaje.="<table style='width:500px; box-sizing: border-box; border-collapse: collapse; border-spacing: 0px;'>";
+            $mensaje.="<tr style='text-align: left;'><td style='border: solid 1px #000000;'><b>ITEM</b></td>";
+            $mensaje.="<td style='text-align: right; border: solid 1px #000000;'><b>PRECIO UNITARIO</b></td>";
+            $mensaje.="<td style='text-align: center; border: solid 1px #000000;'><b>CANTIDAD</b></td>";
+            $mensaje.="<td style='text-align: right; border: solid 1px #000000;'><b>SUBTOTAL</b></td></tr>";
 
-            if($item["ITEM"]=="RESERVA"){
-              $unitario=($item['VALOR_UNITARIO']/$item['CANTIDAD']);
-              $mensaje.="<tr ><td style='text-align:left; border: solid 1px #000000;'>".'COTIZACIÓN'."</td>";
-
-            }else{
-              $mensaje.="<tr ><td style='text-align:left; border: solid 1px #000000;'>".$item["ITEM"]."</td>";
-              $unitario=$item['VALOR_UNITARIO'];
+            $mensaje.="<tr><td style='text-align:left; border: solid 1px #000000;'>Precio Cotización</td>";
+            $mensaje.="<td style='text-align:right; border: solid 1px #000000'>$ ".number_format($precioCotizacion / $cantidad, 0, ',', '.')."</td>";
+            $mensaje.="<td style='text-align:center; border: solid 1px #000000'>".$cantidad."</td>";
+            $mensaje.="<td style='text-align:right; border: solid 1px #000000'>$ ".number_format($precioCotizacion, 0, ',', '.')."</td></tr>";
+            if ($precioCotizacionPromo < $precioCotizacion && $precioCotizacionPromo > 0) {
+              $diferenciaPromo = $precioCotizacion - $precioCotizacionPromo;
+              // $mensaje.="<tr><td style='text-align:left; border: solid 1px #000000;'>Precio Promo</td>";
+              // $mensaje.="<td style='text-align:right; border: solid 1px #000000'>$ ".number_format($precioCotizacionPromo / $cantidad, 0, ',', '.')."</td>";
+              // $mensaje.="<td style='text-align:center; border: solid 1px #000000'>".$cantidad."</td>";
+              // $mensaje.="<td style='text-align:right; border: solid 1px #000000'>$ ".number_format($precioCotizacionPromo, 0, ',', '.')."</td></tr>";
+              $mensaje.="<tr><td style='text-align:left; border: solid 1px #000000;'>Descuento Promo</td>";
+              $mensaje.="<td style='text-align:right; border: solid 1px #000000'>$ - ".number_format($diferenciaPromo / $cantidad, 0, ',', '.')."</td>";
+              $mensaje.="<td style='text-align:center; border: solid 1px #000000'>".$cantidad."</td>";
+              $mensaje.="<td style='text-align:right; border: solid 1px #000000'>$ - ".number_format($diferenciaPromo, 0, ',', '.')."</td></tr>";
             }
 
-            $mensaje.="<td style='text-align:right; border: solid 1px #000000'>$ ".number_format($unitario, 0, ',', '.')."</td>";
-            $mensaje.="<td style='text-align:center; border: solid 1px #000000'>".$item['CANTIDAD']."</td>";
-
-            if($item["ITEM"]=="RESERVA"){
-              $subTotal=($item['VALOR_UNITARIO']);
-            }else{
-
-              $subTotal=($item['CANTIDAD']*$item['VALOR_UNITARIO']);
+            if ($totalOpcionales > 0) {
+              $mensaje.="<tr><td style='text-align:left; border: solid 1px #000000;'>Total Opcionales</td>";
+              $mensaje.="<td style='text-align:right; border: solid 1px #000000'>$ ".number_format($totalOpcionales, 0, ',', '.')."</td>";
+              $mensaje.="<td style='text-align:center; border: solid 1px #000000'>".$cantidad."</td>";
+              $mensaje.="<td style='text-align:right; border: solid 1px #000000'>$ ".number_format($totalOpcionales, 0, ',', '.')."</td></tr>";
             }
-           
-            
-            
-            
-            $total+=$subTotal;
-            
-            
-            $mensaje.="<td style='text-align:right; border: solid 1px #000000'>$ ".number_format($subTotal, 0, ',', '.')."</td></tr>";
-          } 
-          $mensaje.="<tr><td colspan='3' style='text-align: right; border: solid 1px #000000'><b>TOTAL</b></td><td style='text-align: right; border: solid 1px #000000;' ><b>"."$ ".number_format($total, 2, ',', '.')."</b></td></tr>";
-          $mensaje.="</table>";
+            if ($descuentoEfectivo > 0) {
+              $mensaje.="<tr><td style='text-align:left; border: solid 1px #000000;'>Descuento en Efectivo</td>";
+              $mensaje.="<td style='text-align:right; border: solid 1px #000000'>$ - ".number_format($descuentoEfectivo / $cantidad, 0, ',', '.')."</td>";
+              $mensaje.="<td style='text-align:center; border: solid 1px #000000'>1</td>";
+              $mensaje.="<td style='text-align:right; border: solid 1px #000000'> $ -".number_format($descuentoEfectivo, 0, ',', '.')."</td></tr>";
+            }
+
+            $mensaje.="<tr><td colspan='3' style='text-align: right; border: solid 1px #000000'><b>TOTAL A ABONAR</b></td>";
+            $mensaje.="<td style='text-align: right; border: solid 1px #000000;' ><b>$ ".number_format($precioCotizacionAAbonar, 2, ',', '.')."</b></td></tr>";
+            $mensaje.="</table>";
         }
 
         $mensaje.="<table style='width:500px'>";

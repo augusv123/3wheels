@@ -1,13 +1,21 @@
-BEGIN
+    DELIMITER $$
 
-if exists(select * from PRECIOS where ID_TARIFARIO=pId and MODELO=pModelo) then
-begin
-update PRECIOS set PRECIO=pPrecio, PRECIO_PROMO=pPrecioPromo where ID_TARIFARIO=pId and MODELO=pModelo;
-end;
-else
-begin
-insert into PRECIOS values (pPrecio, pId,pModelo,pPrecioPromo);
-end;
-end if;
+    CREATE PROCEDURE PRECIOS_ACTUALIZAR(
+        IN pId INT,
+        IN pModelo VARCHAR(255),
+        IN pPrecio DECIMAL(10,2),
+        IN pPrecioPromo DECIMAL(10,2)
+    )
+    BEGIN
 
-END
+        IF EXISTS (SELECT * FROM PRECIOS WHERE ID_TARIFARIO = pId AND MODELO = pModelo) THEN
+            UPDATE PRECIOS 
+            SET PRECIO = pPrecio, PRECIO_PROMO = pPrecioPromo 
+            WHERE ID_TARIFARIO = pId AND MODELO = pModelo;
+        ELSE
+            INSERT INTO PRECIOS (PRECIO, ID_TARIFARIO, MODELO, PRECIO_PROMO) 
+            VALUES (pPrecio, pId, pModelo, pPrecioPromo);
+        END IF;
+
+    END$$
+    DELIMITER ;

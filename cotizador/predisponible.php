@@ -60,6 +60,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
   }
 
+  $unique_disponibles = [];
+  $seen_models = [];
+
+  foreach ($disponibles as $auto) {
+    if (!in_array($auto['MODELO'], $seen_models)) {
+      $unique_disponibles[] = $auto;
+      $seen_models[] = $auto['MODELO'];
+    }
+  }
+
+  $disponibles = $unique_disponibles;
   foreach ($disponibles as $auto) {
     $cotizacion = sp("RESERVAS_COTIZAR_V3(" . $cantidad . ",'" . $auto["MODELO"] . "','" . $_POST["txtRetiro"] . "')");
 
@@ -81,6 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $disponibles[$indice]["PRECIO_PROMO"] = $precioTotalPromo;
     $indice = $indice + 1;
   }
+
+
 
   $_SESSION["disponibles"] = $disponibles;
   $_SESSION["fechaDesde"] = $_POST["txtRetiro"];
