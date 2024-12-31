@@ -208,15 +208,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                             <div class="col-md-3 col-12">
                                 <div class="form-group">
-                                    <label for="country-floating">Entrega</label>
-                                    <input type="date" class="form-control" id="FechaHasta" name="txtFechaEntrega" <?php
+                                    <label for="country-entrega">Entrega</label>
+                                    <input type="date" class="form-control" id="FechaHasta" name="txtFechaEntrega" value="<?php
                                                                                                                     if (isset($reserva["FECHA_ENTREGA"])) {
                                                                                                                         echo $reserva["FECHA_ENTREGA"];
                                                                                                                     } else {
-                                                                                                                        echo 'dd/mm/yyyy';
+                                                                                                                        echo '';
                                                                                                                     }
 
-                                                                                                                    ?> name="country-floating">
+                                                                                                                    ?>" name="country-floating">
                                 </div>
                             </div>
                             <div class="col-md-3 col-12">

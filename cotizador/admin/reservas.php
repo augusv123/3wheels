@@ -96,7 +96,8 @@ switch ($tipo) {
                             <th data-sortable="" style="width: 150px;"><a href="#" class="dataTable-sorter">CORREO</a></th>
 
                             <?php if($tipo==8){?>  <th data-sortable="" style="width: 100px;"><a href="#" class="dataTable-sorter">Estado</a></th>  <?php } ?>
-                        
+                            <th data-sortable="" style="width: 150px;"><a href="#" class="dataTable-sorter">Eliminar</a></th>
+
     
                     </thead>
                     <tbody>
@@ -125,6 +126,9 @@ switch ($tipo) {
                             <td><?php echo isset($reserva["CORREO"]) ? $reserva["CORREO"] : '' ?></td>
                             <!-- <td style="text-align: right;"><?php echo "$ ".number_format(sp("RESERVAS_OBTENER_PRECIO(".$reserva["ID"].")")[0]["PRECIO"], 0, ',', '.') ?></td> -->
                             <?php if($tipo==8){ echo "<td>".$estados[$reserva["ESTADO"]]."</td>";} ?>
+                            <td style="text-align: center;">
+                            <a style="padding: 20px;" href="javascript:void(0);" onclick="event.stopPropagation(); eliminarReserva(<?php echo $reserva['ID']; ?>)"><i class="bi bi-x-circle"></i></a>
+                            </td>
                         </tr>
 
                          <?php
@@ -187,6 +191,25 @@ $(document).keyup(function (e) {
     if ($("#txtBuscar").is(":focus") && (e.keyCode == 13)) {
         call(1);    }
 });
+
+function eliminarReserva(id) {
+    if (confirm("¿Está seguro que desea eliminar la reserva?")) {
+        $.ajax({
+            url: 'reservas-eliminar.php',
+            type: 'POST',
+            data: { id: id },
+            success: function (data) {
+                if (data.trim() == '1') {
+                    
+                    alert('Reserva eliminada correctamente');
+                    location.reload();
+                } else {
+                    alert('Error al eliminar la reserva');
+                }
+            }
+        });
+    }
+}
 
 </script>
 <?php include('app/footer.php');?>
