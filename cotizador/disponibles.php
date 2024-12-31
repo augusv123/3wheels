@@ -81,6 +81,23 @@
         .text-md-right {
           text-align: right;
         }
+     
+      }
+      .text-alerta{ 
+        font-size: 20px !important;
+      }
+      .icon-alerta{ 
+        font-size: 60px;
+      }
+
+      @media (max-width: 900px) {
+        .text-alerta {
+          font-size: 14px !important;
+        }
+        .icon-alerta{ 
+        font-size: 50px;
+      }
+
       }
     </style>
 
@@ -183,6 +200,7 @@
       </div>
     </nav>
     <!-- end navigation panel -->
+
     <!-- Slide -->
     <section class="page-title parallax3 parallax-fix page-title-large page-title-shop">
       <div class="opacity-light bg-dark-gray"></div>
@@ -199,8 +217,22 @@
         </div>
       </div>
     </section>
-    <!-- about section -->
+  <!-- about section -->
+<!-- Seccion ultimos disponibles -->
+<?php if (isset($_SESSION["disponibles"]) && count($_SESSION["disponibles"]) > 0) { ?>
+<section class="page-title parallax3 parallax-fix  page-title-shop" style="padding: 10px;">
+      <div class="opacity-light bg-dark-gray"></div>
+      <!-- <img class="parallax-background-img" src="img/RentaCarPilar.jpg" alt="" /> -->
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 wow fadeIn margin-three breadcrumb text-uppercase">
+            <h3 class="white-text text-center text-alerta">Apúrese a reservar! <br><br> Quedan pocas unidades disponibles para las fechas seleccionadas.</h3>
 
+          </div>
+        </div>
+      </div>
+    </section>
+    <?php } ?>
     <!-- content section -->
 
     <section class="wow fadeIn xs-no-padding-bottom bg-gray xs-no-padding-top">
@@ -214,7 +246,7 @@
         </div>
       </div>
 
-      <?php if (isset($_SESSION["disponibles"])) {
+      <?php if (isset($_SESSION["disponibles"]) ) {
         // var_dump($disponibles);
         // die();
         // floatval($disponible["PRECIO"])
@@ -608,8 +640,18 @@
 
       <?php };
       }; ?>
-
-
+      <?php
+      if (!isset($_SESSION["disponibles"]) || count($_SESSION["disponibles"]) === 0) {    
+      ?>
+        <div class="p-5 px-0 text-center">
+          <div class="p-5 alert alert-warning text-center" role="alert">
+            <i class="fa fa-exclamation-triangle fa-3x mb-5 icon-alerta" style="margin-bottom: 50px; margin-top: 50px;" aria-hidden="true"></i>
+            <h4 class="alert-heading mt-5 text-alerta" style="margin-bottom: 50px;">Lamentablemente ya no quedan unidades disponibles para las fechas seleccionadas.</h4>
+          </div>
+        </div>
+      <?php
+        }
+      ?>
 
 
 

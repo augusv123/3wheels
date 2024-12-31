@@ -85,7 +85,6 @@ $lugar = array("", "Obelisco (Av. 9 de Julio y Av. Corrientes)", "Aeroparque (Ae
 
         @media only screen and (max-width: 600px) {
 
-            #accesosDirectos,
             #cabeceraClientes {
                 display: none;
             }
@@ -277,16 +276,16 @@ $lugar = array("", "Obelisco (Av. 9 de Julio y Av. Corrientes)", "Aeroparque (Ae
 
             <div class="page-content">
                 <div class="row" id="accesosDirectos">
-                    <div class="col-xs-12 col-lg-3 col-md-6" onclick="javascript:location.href='reservas?t=1'">
+                    <div class="col-12 col-lg-3 col-md-6" onclick="javascript:location.href='reservas?t=1'">
                         <div class="card">
                             <div class="card-body px-3 py-4-5 tarjeta">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-4">
                                         <div class="stats-icon purple">
                                             <i class="iconly-boldShow"></i>
                                         </div>
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-8">
                                         <h6 class="text-muted font-semibold">Reservas en trámite</h6>
                                         <h6 class="font-extrabold mb-0"><?php echo $totales["tramite"] ?></h6>
                                     </div>
@@ -294,50 +293,50 @@ $lugar = array("", "Obelisco (Av. 9 de Julio y Av. Corrientes)", "Aeroparque (Ae
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-lg-3 col-md-6" onclick="javascript:location.href='reservas?t=2'">
+                    <div class="col-12 col-lg-3 col-md-6" onclick="javascript:location.href='reservas?t=2'">
                         <div class="card">
                             <div class="card-body px-3 py-4-5 tarjeta">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-4">
                                         <div class="stats-icon blue">
                                             <i class="iconly-boldUpload"></i>
                                         </div>
                                     </div>
-                                    <div class="col-md-8">
-                                        <h6 class="text-muted font-semibold">Retiros</h6>
+                                    <div class="col-8">
+                                        <h6 class="text-muted font-semibold">Retirados</h6>
                                         <h6 class="font-extrabold mb-0"><?php echo $totales["reservados"] ?></h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-lg-3 col-md-6" onclick="javascript:location.href='reservas?t=3'">
+                    <div class="col-12 col-lg-3 col-md-6" onclick="javascript:location.href='reservas?t=3'">
                         <div class="card">
                             <div class="card-body px-3 py-4-5 tarjeta">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-4">
                                         <div class="stats-icon green">
                                             <i class="iconly-boldDownload"></i>
                                         </div>
                                     </div>
-                                    <div class="col-md-8">
-                                        <h6 class="text-muted font-semibold">Entregas</h6>
+                                    <div class="col-8">
+                                        <h6 class="text-muted font-semibold">Entregados</h6>
                                         <h6 class="font-extrabold mb-0"><?php echo $totales["entregar"] ?></h6>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-lg-3 col-md-6 " onclick="javascript:location.href='calendario.php'">
+                    <div class="col-12 col-lg-3 col-md-6 " onclick="javascript:location.href='calendario.php'">
                         <div class="card">
                             <div class="card-body px-3 py-4-5 tarjeta">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-4">
                                         <div class="stats-icon red">
                                             <i class="iconly-boldCalendar"></i>
                                         </div>
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-8">
                                         <h6 class="text-muted font-semibold">Calendario</h6>
                                         <h6 class="font-extrabold mb-0"><?php echo $totales["reservados"] ?></h6>
                                     </div>
@@ -346,3 +345,5 @@ $lugar = array("", "Obelisco (Av. 9 de Julio y Av. Corrientes)", "Aeroparque (Ae
                         </div>
                     </div>
                 </div>
+
+        

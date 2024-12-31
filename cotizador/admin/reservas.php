@@ -16,11 +16,11 @@ switch ($tipo) {
         break;
     case 2:
         $data=sp('RESERVAS_CONSULTAR_RETIRAR()');
-        $tipoTitulo="Autos a retirar";
+        $tipoTitulo="Autos retirados";
         break;
     case 3:
         $data=sp('RESERVAS_CONSULTAR_ENTREGAR()');
-        $tipoTitulo="Autos a entregar";
+        $tipoTitulo="Autos entregados";
         break;
     case 5:
         $data=sp('RESERVAS_CONSULTAR_ESTADO(5)');
