@@ -6,14 +6,6 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include('./app/database.php');
-// // Assuming you want to access the variable sent by JavaScript
-// if(isset($_POST['txtRetiro']) && isset($_POST['txtEntrega'] )) {
-//     $disponibles=sp("RESERVAS_DISPONIBILIDAD('".$_POST["txtRetiro"]."','".$_POST["txtEntrega"]."')");
-//     $autos = $disponibles;
-//     echo json_encode($disponibles);
-// } else {
-//     return;
-// }
 
 if(isset($_POST['txtRetiro']) && isset($_POST['txtEntrega'] )) {
 $autos=sp("RESERVAS_DISPONIBILIDAD('".$_POST["txtRetiro"]."','".$_POST["txtEntrega"]."')");

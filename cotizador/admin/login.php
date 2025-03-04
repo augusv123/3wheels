@@ -8,7 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pass =cleanText($_POST['pass']);
     if($user=="admin" && $pass=="horacio22!"){
         $_SESSION["usuario"]="admin";
-        header("Location: https://3wheels.com.ar/cotizador/admin/reservas.php");
+        // header("Location: https://3wheels.com.ar/cotizador/admin/reservas.php");
+        header("Location: http://localhost/3wheels/cotizador/admin/reservas.php");
         die();
     };
   };

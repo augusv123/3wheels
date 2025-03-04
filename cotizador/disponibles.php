@@ -68,6 +68,9 @@
           <![endif]-->
 
     <style>
+      .mt-1 {
+        margin-top: 10px;
+      }
       .on-sale-flex {
         background: #5aa5e6;
       color: #fff;
@@ -246,7 +249,7 @@
         </div>
       </div>
 
-      <?php if (isset($_SESSION["disponibles"]) ) {
+      <?php if (isset($_SESSION["disponibles"]) && count($_SESSION["disponibles"]) > 0) {
         // var_dump($disponibles);
         // die();
         // floatval($disponible["PRECIO"])
@@ -331,6 +334,10 @@
                             echo "6";
                             break;
 
+                            case "Spin":
+                              echo "3";
+                              break;
+
                           default:
                             echo "1";;
                             break;
@@ -350,6 +357,10 @@
                           case "H1 Premium":
                             echo "4";
                             break;
+
+                            case "Spin":
+                              echo "3";
+                              break;
                           
 
                           default:
@@ -364,33 +375,33 @@
                       <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> <img src="img/ico-AC.png" alt="Aire Acondicionado" /><br>
                         SI</div>
                       <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> <img src="img/ico-cambios.png" alt="Caja de Cambios" /><br>
-                        MT</div>
+                        <?php echo ($disponible["MODELO"] == 'Spin' || $disponible["MODELO"] == 'H1 Premium') ? 'AT' : 'MT'; ?></div>
 
                         <?php
-                        if($disponible["MODELO"] == 'H1 Premium'){
+                        if($disponible["MODELO"] == 'H1 Premium' || $disponible["MODELO"] == 'Spin'){
                         ?>
 
                     
 
 
-                        <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> 
+                        <div class="col-lg-3 mt-1 col-md-5 col-xs-2 no-padding-left text-center"> 
                           <img width="20" src="img/people.png" alt="capacidad" />
                         <br>
-                        12
+                        <?php echo ($disponible["MODELO"] == 'Spin') ? '7' : '12'; ?>
                         </div>
-                        <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> 
+                        <div class="col-lg-3 mt-1 col-md-5 col-xs-2 no-padding-left text-center"> 
                           <img width="20" src="img/airbag.png" alt="airbag" />
                         <br>
                         SI
                         </div>
 
-                        <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> 
+                        <div class="col-lg-3 mt-1 col-md-5 col-xs-2 no-padding-left text-center"> 
                           <img width="20" src="img/car-steering-wheel.png" alt="direccion" />
                         <br>
                         HD
                         </div>
 
-                        <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> 
+                        <div class="col-lg-3 mt-1 col-md-5 col-xs-2 no-padding-left text-center"> 
                           <img width="20" src="img/car.png" alt="abs" />
                         <br>
                         SI
@@ -641,7 +652,7 @@
       <?php };
       }; ?>
       <?php
-      if (!isset($_SESSION["disponibles"]) || count($_SESSION["disponibles"]) === 0) {    
+      if (!isset($_SESSION["disponibles"]) || count($_SESSION["disponibles"]) <= 0) {    
       ?>
         <div class="p-5 px-0 text-center">
           <div class="p-5 alert alert-warning text-center" role="alert">

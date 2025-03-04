@@ -680,6 +680,7 @@ if ($estado[0]["valor"] == "0") {
       });
 
       const data = await response.json();
+      console.log(data, 'data')
       var minDias = data.min_dias;
 
       // Verificar si los días son menores que el mínimo

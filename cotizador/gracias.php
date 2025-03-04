@@ -276,13 +276,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION["reserva"])) {
         $precioCotizacionAAbonar = $precioCotizacionAAbonar - $descuentoEfectivo;
 
 
-        if($horasExcedentes>5){
-          $cantidad=$cantidad-1;
-          $hayExcendente=true;
+        // if($horasExcedentes>5){
+        //   $cantidad=$cantidad-1;
+        //   $hayExcendente=true;
      
-          $valorUnitario=$cotizacion[0]["PRECIO"]/$_SESSION["cantidad"];
+        //   $valorUnitario=$cotizacion[0]["PRECIO"]/$_SESSION["cantidad"];
 
-        }
+        // }
 
         $consultar=true;
 
@@ -293,10 +293,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION["reserva"])) {
 
             $cantidadCotizacion=$_SESSION["cantidad"];
             $precioCotizacion=$cotizacion[0]["PRECIO"];
-           if($hayExcendente){
-            $precioCotizacion=$cotizacion[0]["PRECIO"]-$valorUnitario;
-            $cantidadCotizacion=$cantidad-1; 
-           }
+        //   if($hayExcendente){
+        //     $precioCotizacion=$cotizacion[0]["PRECIO"]-$valorUnitario;
+        //     $cantidadCotizacion=$cantidad-1; 
+        //   }
 
 
           sp_exec('COTIZACIONES_REGISTRAR('.$resultado[0][0].',"RESERVA",'.$precioCotizacion.','. $cantidadCotizacion.')');

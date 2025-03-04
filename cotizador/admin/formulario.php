@@ -31,7 +31,7 @@ try {
         $horasExcedentes = (strtotime($horaEntrega) - strtotime($horaRetiro)) / 3600;
 
 
-        $cantidad = $interval->days + 1;
+        $cantidad = $interval->days;
 
         if ($horasExcedentes > 5) {
             $cantidad = $cantidad + 1;
@@ -154,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-">
+                                        <div class="col-12">
                                             <div class="form-group">
                                                 <label for="city-column">Lugar de retiro</label>
                                                 <select id="txtLugar" class="form-select" name="txtLugar" required style="max-width: 100%;">
@@ -172,7 +172,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-12">
+                                            <label for="requisitosTextArea"> Mensaje de cotización</label>
+                                            <textarea id="requisitosTextArea" style="width: 100%; height: 200px;">
+                                                Requisitos para el alquiler: <br>
+                                                🔹 Las tarifas incluyen seguro (consulte también por nuestro seguro Premium), kilometraje ilimitado y conductor adicional sin cargo.<br>
+                                                🔸 Los requisitos son ser mayor de 25 años, DNI, licencia de conducir, tarjeta de crédito y un comprobante de límite de crédito de la tarjeta para constatar que tenga el crédito suficiente ($1.200.000) para afrontar el pago de la garantía en caso de accidente y/o siniestro. <br> 
+                                                🔹 La reserva se realiza enviando la documentación correspondiente a través de este medio o en nuestras oficinas de Shopping Via Pilar Local 38: R. Caamaño 1103 B1631 Villa Rosa, Provincia de Buenos Aires<br>
+                                                ✳️ Una vez aprobada la documentación puede abonar el total del alquiler o reservar con $100.000 y abonar el resto al momento de la entrega.
+                                                Desde ya agradecemos que nos haya contactado. Quedamos a disposición ante cualquier inquietud. Saludos!! 🚘
+                                            </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-12 d-flex justify-content-end">
+                                            <button onclick="clearTextArea()" type="button" class="btn btn-light-secondary me-1 mb-1">Borrar Mensaje</button>
                                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Cotizar</button>
                                         </div>
@@ -180,12 +194,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </div>
                                 <div id="mi-seccion" class="col-md-12 col-12" style="height:50vh;overflow:hidden;overflow-y:scroll">
                                     <div style="padding:10px; position: sticky;top:0px;z-index:400;background-color:white;border-bottom:1px solid gray ">
-                                        <h4>Cotización 
+                                       
+                                        <h4>Cotización  </h4>
+                                        <p>
                                             <?php if($entrega) { 
-                                                echo 'desde: '.formatearFecha($entrega);
+                                                echo 'desde: '.formatearFecha($retiro);
                                              ?>
-                                         hasta <?php echo formatearFecha($retiro); }  ?>
-                                        </h4>
+                                        </p>
+                                        <p>
+                                            hasta <?php echo formatearFecha($entrega); }  ?>
+                                        </p>
                                     </div>
 
                                     <?php
@@ -211,7 +229,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         if (count($disponibles) == 0) {
                                             echo "No hay autos disponibles para las fechas seleccionadas";
                                         };
-
+                                        $unique_disponibles = [];
+                                        $seen_models = [];
+                                      
+                                        foreach ($disponibles as $auto) {
+                                          if (!in_array($auto['MODELO'], $seen_models)) {
+                                            $unique_disponibles[] = $auto;
+                                            $seen_models[] = $auto['MODELO'];
+                                          }
+                                        }
+                                      
+                                        $disponibles = $unique_disponibles;
                                         foreach ($disponibles as $auto) {
                                             $cotizacion = sp("RESERVAS_COTIZAR_V3(" . $cantidad . ",'" . $auto["MODELO"] . "','" . $retiro . "')");
 
@@ -231,16 +259,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <div class="card border my-3">
                                                 <div class="card-body py-4 px-0">
                                                     <div class="row">
-                                                        <div class="col-6">
+                                                        <div class="col-md-8 col-12">
                                                             <div class="d-flex align-items-left">
 
                                                                 <div class="ms-3 name">
-                                                                    <h5 class="font-bold"><?php echo $auto["MODELO"] ?></h5>
-                                                                    <h6 class="text-muted mb-0"><?php echo $auto["MARCA"] . " - Total $" . $precioTotal . " - " . $cantidad . " dias"; ?></h6>
+                                                                    <h6 class="font-bold"><?php echo $auto["MARCA"]. ' - ' . $auto["MODELO"]." - " . $cantidad . " días"; ?></h6>
+                                                                    <p class="text-muted mb-0"><?php echo  " - Precio con tarjeta: $" . $precioTotal  ?></p>
+                                                                    <p class="text-muted mb-0"><?php echo  " - Precio transferencia bancaria: $" . ($precioTotal * 0.9)  ?></p>
+                                                                    <p class="text-muted mb-0"><?php echo  " - Precio en efectivo: $" . ($precioTotal * 0.85)  ?></p>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-6">
+                                                        <div class="col-md-4 col-12 d-flex justify-content-center">
                                                             <img class="img-fluid" src="<?php echo $auto["IMAGEN"] ?>" width="150" alt="">
                                                         </div>
                                                     </div>
@@ -248,8 +278,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 </div>
                                             </div>
                                             <!-- Hhasta aca -->
+
                                     <?php
                                         }
+                                        ?>
+                                        <div class="col-12">
+                                            <p id="requisitos">
+                                                Requisitos para el alquiler: <br>
+                                               🔹 Las tarifas incluyen seguro (consulte también por nuestro seguro Premium), kilometraje ilimitado y conductor adicional sin cargo.<br>
+                                               🔸 Los requisitos son ser mayor de 25 años, DNI, licencia de conducir, tarjeta de crédito y un comprobante de límite de crédito de la tarjeta para constatar que tenga el crédito suficiente ($1.200.000) para afrontar el pago de la garantía en caso de accidente y/o siniestro. <br> 
+                                               🔹 La reserva se realiza enviando la documentación correspondiente a través de este medio o en nuestras oficinas de Shopping Via Pilar Local 38: R. Caamaño 1103 B1631 Villa Rosa, Provincia de Buenos Aires<br>
+                                               ✳️ Una vez aprobada la documentación puede abonar el total del alquiler o reservar con $100.000 y abonar el resto al momento de la entrega.
+                                               Desde ya agradecemos que nos haya contactado. Quedamos a disposición ante cualquier inquietud. Saludos!! 🚘
+                                            </p>
+                                        </div>
+                                        <?php
                                         $jsonAutos = json_encode($disponibles);
                                     }
 
@@ -258,7 +301,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                 </div>
                                 <div class="col-12 d-flex justify-content-end">
-                                <button type="button" id="descargar2" onClick="generarPDF()"  class="btn btn-success">Descargar cotizacion</button>
+                                <button type="button" id="descargar2" onClick="generarPDF()"  class="btn btn-success mx-3">Descargar cotizacion</button>
+                                <button type="button" id="descargar2" onClick="compartirPDF()"  class="btn btn-success">Compartir cotizacion
+                                </button>
                                 </div>
 
 
@@ -321,39 +366,105 @@ catch(error){
 
 
 <script>
-    function generarPDF() {
-      const { jsPDF } = window.jspdf || {};
+document.addEventListener('DOMContentLoaded', function() {
+    const textArea = document.getElementById("requisitosTextArea");
+    const requisitosParagraph = document.getElementById("requisitos");
 
-      if (jsPDF) {
+    // Set initial content to the paragraph
+    requisitosParagraph.innerHTML = textArea.value;
+
+    // Update paragraph content when textarea value changes
+    textArea.addEventListener("input", () => {
+      requisitosParagraph.innerHTML = textArea.value;
+    });
+});
+
+function clearTextArea(){
+    const textArea = document.getElementById("requisitosTextArea");
+    const requisitosParagraph = document.getElementById("requisitos");
+
+    requisitosParagraph.innerHTML = '';
+    textArea.value = '';
+}
+function generarPDF() {
+    const { jsPDF } = window.jspdf || {};
+
+    if (jsPDF) {
         const element = document.getElementById('mi-seccion');
         const originalHeight = element.style.height;
         const originalOverflow = element.style.overflow;
 
         element.style.height = 'auto';
         element.style.overflow = 'visible';
-        // Usar html2canvas para capturar el contenido como imagen
-        html2canvas(element, { scale: 2 , useCORS : true }).then(canvas => {
-          const imgData = canvas.toDataURL('image/png');  // Convertir canvas a imagen en base64
-          const pdf = new jsPDF('p', 'pt', 'a4');  // Crear un PDF en formato A4
 
-          // Calcular el ancho y alto de la imagen para ajustarla al PDF
-          const imgWidth = 595.28;  // Ancho de la página A4 en puntos
-          const pageHeight = 1041.89;  // Altura de la página A4 en puntos
-          const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        html2canvas(element, { scale: 2, useCORS: true }).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdfWidth = 595.28; // Ancho estándar de A4 en puntos
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width; // Calcular altura proporcional
 
-          let position = 0;
-          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            // Crear PDF con una sola página del tamaño del contenido
+            const pdf = new jsPDF('p', 'pt', [pdfWidth, pdfHeight]);
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
 
-          // Guardar el archivo PDF
-          pdf.save("documento.pdf");
+            // Guardar el archivo PDF
+            pdf.save("documento.pdf");
 
-          element.style.height = originalHeight;
-          element.style.overflow = originalOverflow;
+            // Restaurar el estilo original
+            element.style.height = originalHeight;
+            element.style.overflow = originalOverflow;
         });
-      } else {
+    } else {
         console.error("jsPDF no se ha cargado correctamente.");
-      }
     }
+}
+
+function compartirPDF() {
+    const { jsPDF } = window.jspdf || {};
+
+    if (jsPDF) {
+        const element = document.getElementById('mi-seccion');
+        const originalHeight = element.style.height;
+        const originalOverflow = element.style.overflow;
+
+        element.style.height = 'auto';
+        element.style.overflow = 'visible';
+
+        html2canvas(element, { scale: 2, useCORS: true }).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdfWidth = 595.28; // Ancho estándar de A4 en puntos
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width; // Calcular altura proporcional
+
+            // Crear PDF con una sola página del tamaño del contenido
+            const pdf = new jsPDF('p', 'pt', [pdfWidth, pdfHeight]);
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+
+      // Generar el archivo PDF como blob
+      const pdfBlob = pdf.output('blob');
+            const file = new File([pdfBlob], "documento.pdf", { type: "application/pdf" });
+
+            // Usar Web Share API
+            if (navigator.share) {
+                navigator
+                    .share({
+                        title: "Compartir PDF",
+                        text: "Te comparto este documento PDF.",
+                        files: [file], // Adjuntar el archivo
+                    })
+                    .then(() => console.log("Compartido exitosamente"))
+                    .catch(err => console.error("Error al compartir:", err));
+            } else {
+                alert("Tu navegador no soporta compartir archivos.");
+            }
+
+            // Restaurar el estilo original
+            element.style.height = originalHeight;
+            element.style.overflow = originalOverflow;
+        });
+    } else {
+        console.error("jsPDF no se ha cargado correctamente.");
+    }
+}
+
   </script>
 
     

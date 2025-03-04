@@ -304,7 +304,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe>
               <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> <img src="img/ico-AC.png" alt="Aire Acondicionado"/><br>
                 SI</div>
               <div class="col-lg-3 col-md-5 col-xs-2 no-padding-left text-center"> <img src="img/ico-cambios.png" alt="Caja de Cambios"/><br>
-                MT</div>
+              <?php echo ($disponible["MODELO"] == 'Spin' || $disponible["MODELO"] == 'H1 Premium') ? 'AT' : 'MT'; ?></div>
                 <?php
                       if($disponible["MODELO"] == 'H1 Premium'){
                       ?>
