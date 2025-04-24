@@ -128,6 +128,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $reserva = $data[0];
         }
+        // var_dump($reserva);
+        // die();
     }
 }
 ?>

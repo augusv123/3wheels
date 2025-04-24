@@ -12,26 +12,26 @@ if(!empty($_GET["t"]))
 
 switch ($tipo) {
     case 1:
-        $data=sp('RESERVAS_CONSULTAR_TRAMITE()');
+        $data=sp('reservas_por_estado(1)');
         break;
     case 2:
-        $data=sp('RESERVAS_CONSULTAR_RETIRAR()');
+        $data=sp('reservas_por_estado(2)');
         $tipoTitulo="Autos retirados";
         break;
     case 3:
-        $data=sp('RESERVAS_CONSULTAR_ENTREGAR()');
+        $data=sp('reservas_por_estado(4)');
         $tipoTitulo="Autos entregados";
         break;
     case 5:
-        $data=sp('RESERVAS_CONSULTAR_ESTADO(5)');
+        $data=sp('reservas_por_estado(5)');
         $tipoTitulo="Reservas canceladas";
         break;
     case 6:
-        $data=sp('RESERVAS_CONSULTAR_ESTADO(6)');
+        $data=sp('reservas_por_estado(6)');
         $tipoTitulo="Autos en taller";
         break;
     case 7:
-        $data=sp('RESERVAS_CONSULTAR_ESTADO(4)');
+        $data=sp('reservas_por_estado(4)');
         $tipoTitulo="Reservas finalizadas";
         break;
     case 8:

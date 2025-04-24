@@ -50,7 +50,13 @@ function sp_exec($sp){
     if(!$resultado)$tipo="error-";
     $date = date('m/d/Y h:i:s a', time());
     $txt = $tipo.$date." -".mysqli_error($conexion)."  ".$sp;
-    $myfile = file_put_contents('logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+    // try {
+    //   $myfile = file_put_contents('logs.txt', $txt.PHP_EOL , FILE_APPEND | LOCK_EX);
+
+    // }
+    // catch (Exception $e) {
+    //   // echo 'Caught exception: ',  $e->getMessage(), "\n";
+    // }
 
   }
   

@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $data=sp('TARIFARIO_CALCULAR('.$reserva[0].')');
         $cotizacion=$data;
-        
+
          
 
     }
